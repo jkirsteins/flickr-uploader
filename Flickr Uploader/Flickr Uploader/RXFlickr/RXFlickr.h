@@ -49,11 +49,10 @@
   id<RXFlickrDelegate> delegate;
 }
 
-@property(nonatomic,retain) UIWebView* webView;
-@property(nonatomic,assign) id<RXFlickrDelegate> delegate;
-@property(nonatomic,retain) NSString* token;
-@property(nonatomic,retain) NSString* tokenSecret;
-
+@property(nonatomic,strong) UIWebView* webView;
+@property(nonatomic,weak) id<RXFlickrDelegate> delegate;
+@property(nonatomic,strong) NSString* token;
+@property(nonatomic,strong) NSString* tokenSecret;
 
 /*!
  * @method startAuthorization

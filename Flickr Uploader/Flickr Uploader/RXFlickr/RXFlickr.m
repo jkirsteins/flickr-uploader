@@ -52,21 +52,11 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
   
   self = [super init];
   if (self) {
-    _consumerKey = [consumerKey retain];
-    _consumerSecret = [consumerSecret retain];
-    _callbackURL = [callbackURL retain];
+    _consumerKey = consumerKey;
+    _consumerSecret = consumerSecret;
+    _callbackURL = callbackURL;
   }
   return self;
-}
-
-- (void)dealloc 
-{
-  [_consumerKey release];
-  [_consumerSecret release];
-  [_callbackURL release];
-  [_webView release];
-  
-  [super dealloc];
 }
 
 #pragma mark - Utility Methods
@@ -74,8 +64,8 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
 - (NSString*)extractVerifierFromURL:(NSURL*)url
 {
   NSArray* parameters = [[url absoluteString] componentsSeparatedByString:@"&"];
-  NSArray* keyValue = [[parameters objectAtIndex:1] componentsSeparatedByString:@"="];
-  NSString* verifier = [keyValue objectAtIndex:1];
+  NSArray* keyValue = [parameters[1] componentsSeparatedByString:@"="];
+  NSString* verifier = keyValue[1];
   return verifier;
 }
 
@@ -98,11 +88,11 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
   NSMutableArray* pairs = [NSMutableArray array];
   NSArray* keys = [[dictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
   for (NSString *key in keys) {
-    NSString *value = [dictionary objectForKey:key];
+    NSString *value = dictionary[key];
     CFStringRef escapedValue = CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)value, NULL, CFSTR("%:/?#[]@!$&'()*+,;="), kCFStringEncodingUTF8);
-    NSMutableString *pair = [[key mutableCopy] autorelease];
+    NSMutableString *pair = [key mutableCopy];
     [pair appendString:@"="];
-    [pair appendString:(NSString *)escapedValue];
+    [pair appendString:(__bridge NSString *)escapedValue];
     [pairs addObject:pair];
     CFRelease(escapedValue);
   }
@@ -111,7 +101,7 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
     URLString = [URLString stringByAddingURLEncoding];
   }
   
-  NSMutableString *mURLString = [[URLString mutableCopy] autorelease];
+  NSMutableString *mURLString = [URLString mutableCopy];
   [mURLString appendString:(urlEscape ? @"&" : @"?")];
   NSString *args = [pairs componentsJoinedByString:@"&"];
   if( urlEscape ) { args = [args stringByAddingURLEncoding]; }
@@ -125,11 +115,11 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
   _currentState = FlickrOAuthStateAccessToken;
   
   CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-  NSString* nonce = (NSString*)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+  NSString* nonce = (NSString*)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuid));
   CFRelease(uuid);
   NSString* timestamp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
-  NSString* signatureMethod = [NSString stringWithString:@"HMAC-SHA1"];
-  NSString* version = [NSString stringWithString:@"1.0"];
+  NSString* signatureMethod = @"HMAC-SHA1";
+  NSString* version = @"1.0";
   NSString* verifier = [self extractVerifierFromURL:url];
   
   NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:nonce, @"oauth_nonce", timestamp, @"oauth_timestamp", verifier, @"oauth_verifier", _consumerKey, @"oauth_consumer_key", signatureMethod, @"oauth_signature_method", version, @"oauth_version", _token, @"oauth_token", nil];
@@ -141,26 +131,24 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
   [parameters setValue:signatureString forKey:@"oauth_signature"];
   NSString* urlStringWithSignature = [self sortedURLStringFromDictionary:parameters urlEscape:NO];
   
-  NSMutableURLRequest* req = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlStringWithSignature]] autorelease];
-  NSURLConnection* connection = [[[NSURLConnection alloc] initWithRequest:req delegate:self] autorelease];
-  _receivedData = [[NSMutableData data] retain];
+    NSMutableURLRequest* req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlStringWithSignature]];
+  NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+  _receivedData = [NSMutableData data];
   [connection start];
-  [nonce release];
 }
 
 #pragma mark - Public Methods
-
 - (void)startAuthorization
 {
   NSParameterAssert(_webView != nil);
   _currentState = FlickrOAuthStateRequestToken;
   
   CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-  NSString* nonce = (NSString*)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+  NSString* nonce = (NSString*)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuid));
   CFRelease(uuid);
   NSString* timestamp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
-  NSString* signatureMethod = [NSString stringWithString:@"HMAC-SHA1"];
-  NSString* version = [NSString stringWithString:@"1.0"];
+  NSString* signatureMethod = @"HMAC-SHA1";
+  NSString* version = @"1.0";
 
   NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:nonce, @"oauth_nonce", timestamp, @"oauth_timestamp", _consumerKey, @"oauth_consumer_key", signatureMethod, @"oauth_signature_method", version, @"oauth_version", _callbackURL, @"oauth_callback", nil];
   NSString* urlStringBeforeSignature = [self sortedURLStringFromDictionary:parameters urlEscape:YES];
@@ -171,12 +159,10 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
   [parameters setValue:signatureString forKey:@"oauth_signature"];
   NSString* urlStringWithSignature = [self sortedURLStringFromDictionary:parameters urlEscape:NO];
   
-  NSMutableURLRequest* req = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlStringWithSignature]] autorelease];
-  NSURLConnection* connection = [[[NSURLConnection alloc] initWithRequest:req delegate:self] autorelease];
-  _receivedData = [[NSMutableData data] retain];
+  NSMutableURLRequest* req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlStringWithSignature]];
+  NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+  _receivedData = [NSMutableData data];
   [connection start];
-  
-  [nonce release];
 }
 
 #pragma mark - UIWebView Delegate
@@ -213,13 +199,13 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
     NSMutableDictionary* d = [NSMutableDictionary dictionary];
     [parameters enumerateObjectsUsingBlock:^(NSString* element, NSUInteger idx, BOOL *stop) {
       NSArray* array = [element componentsSeparatedByString:@"="];
-      NSString* key = [array objectAtIndex:0];
-      NSString* value = [array objectAtIndex:1];
+      NSString* key = array[0];
+      NSString* value = array[1];
       [d setValue:value forKey:key];
     }];
-    if ([[d objectForKey:@"oauth_callback_confirmed"] boolValue] == YES) {
-      _token = [[d objectForKey:@"oauth_token"] retain];
-      _tokenSecret = [[d objectForKey:@"oauth_token_secret"] retain];
+    if ([d[@"oauth_callback_confirmed"] boolValue] == YES) {
+      _token = d[@"oauth_token"];
+      _tokenSecret = d[@"oauth_token_secret"];
       NSString* urlString = [NSString stringWithFormat:@"%@?oauth_token=%@&perms=%@", kAuthorizeBaseURL, _token, @"read"];
       [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
     } else {
@@ -227,8 +213,6 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
         [_delegate flickrDidNotAuthorize:self];
       }
     }
-    [_receivedData release];
-    [response release];
   } else {
     NSString* response = [[NSString alloc] initWithData:_receivedData encoding:NSUTF8StringEncoding];
     NSArray* parameters = [response componentsSeparatedByString:@"&"];
@@ -236,15 +220,13 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
     NSMutableDictionary* d = [NSMutableDictionary dictionary];
     [parameters enumerateObjectsUsingBlock:^(NSString* element, NSUInteger idx, BOOL *stop) {
       NSArray* array = [element componentsSeparatedByString:@"="];
-      NSString* key = [array objectAtIndex:0];
-      NSString* value = [array objectAtIndex:1];
+      NSString* key = array[0];
+      NSString* value = array[1];
       [d setValue:value forKey:key];
     }];
-    if ([[d objectForKey:@"username"] length] > 0) {
-      if (_token) [_token release];
-      if (_tokenSecret) [_tokenSecret release];
-      _token = [[d objectForKey:@"oauth_token"] retain];
-      _tokenSecret = [[d objectForKey:@"oauth_token_secret"] retain];
+    if ([d[@"username"] length] > 0) {
+      _token = d[@"oauth_token"];
+      _tokenSecret = d[@"oauth_token_secret"];
       if ([_delegate respondsToSelector:@selector(flickrDidAuthorize:)]) {
         [_delegate flickrDidAuthorize:self];
       }
@@ -253,23 +235,19 @@ static NSString* kAccessTokenBaseURL  = @"http://www.flickr.com/services/oauth/a
         [_delegate flickrDidNotAuthorize:self];
       }
     }
-    
-    [_receivedData release];
-    [response release];
   }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-  [_receivedData release];
+  _receivedData = nil;
 }
 
 #pragma mark - Public Properties
 
 - (void)setWebView:(UIWebView *)webView
 {
-  if (_webView) [_webView release];
-  _webView = [webView retain];
+  _webView = webView;
   [_webView setDelegate:self];
   [_webView setScalesPageToFit:YES];
 }
