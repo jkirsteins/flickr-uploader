@@ -41,6 +41,7 @@
 
 -(void)addPhoto:(ALAssetRepresentation *)asset
 {
+    NSLog(@"%@", [asset metadata]);
     NSLog(@"Adding photo: %@", [asset filename]);
 }
 
