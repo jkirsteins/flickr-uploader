@@ -46,10 +46,10 @@
             </objects>
             <point key="canvasLocation" x="596" y="-49"/>
         </scene>
-        <!--View Controller-->
+        <!--Flickr Uploader Main View Controller-->
         <scene sceneID="3mS-j6-laO">
             <objects>
-                <viewController id="GG1-Yg-8Ge" sceneMemberID="viewController">
+                <viewController id="GG1-Yg-8Ge" customClass="MDFlickrUploaderMainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8K1-Ge-c8t">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBw-Wx-xg8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1100" y="-133"/>
+            <point key="canvasLocation" x="1150" y="-49"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="N6l-L9-VnO">
@@ -91,16 +91,6 @@
             <point key="canvasLocation" x="70" y="-49"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="MDFlickrAuthenticationViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDFlickrAuthenticationViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="tappedAuthenticateButton:"/>
-                <relationship kind="outlet" name="authenticateButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

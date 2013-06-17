@@ -18,6 +18,7 @@
 		E23B9CB91767A9A10085E174 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23B9C9B1767A9A10085E174 /* UIKit.framework */; };
 		E23B9CC11767A9A10085E174 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E23B9CBF1767A9A10085E174 /* InfoPlist.strings */; };
 		E23B9CC31767A9A10085E174 /* Flickr_UploaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B9CC21767A9A10085E174 /* Flickr_UploaderTests.m */; };
+		E25F80D9176EC19400328511 /* MDFlickrUploaderMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F80D8176EC19400328511 /* MDFlickrUploaderMainViewController.m */; };
 		E2DAFE05176DFBF500A5C316 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE04176DFBF500A5C316 /* NSString+MD5.m */; };
 		E2DAFE1F176DFC0600A5C316 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE07176DFC0600A5C316 /* NSObject+SBJson.m */; };
 		E2DAFE20176DFC0600A5C316 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE0A176DFC0600A5C316 /* SBJsonParser.m */; };
@@ -67,6 +68,9 @@
 		E23B9CBE1767A9A10085E174 /* Flickr UploaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Flickr UploaderTests-Info.plist"; sourceTree = "<group>"; };
 		E23B9CC01767A9A10085E174 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E23B9CC21767A9A10085E174 /* Flickr_UploaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Flickr_UploaderTests.m; sourceTree = "<group>"; };
+		E25F80D7176EC19400328511 /* MDFlickrUploaderMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDFlickrUploaderMainViewController.h; path = ViewControllers/MDFlickrUploaderMainViewController.h; sourceTree = "<group>"; };
+		E25F80D8176EC19400328511 /* MDFlickrUploaderMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDFlickrUploaderMainViewController.m; path = ViewControllers/MDFlickrUploaderMainViewController.m; sourceTree = "<group>"; };
+		E25F80DA176EC22800328511 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E2DAFE03176DFBF500A5C316 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Utilities/NSString+MD5.h"; sourceTree = "<group>"; };
 		E2DAFE04176DFBF500A5C316 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "Utilities/NSString+MD5.m"; sourceTree = "<group>"; };
 		E2DAFE06176DFC0600A5C316 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 		E23B9C961767A9A10085E174 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E25F80DA176EC22800328511 /* AssetsLibrary.framework */,
 				E23B9C971767A9A10085E174 /* Foundation.framework */,
 				E23B9C991767A9A10085E174 /* CoreGraphics.framework */,
 				E23B9C9B1767A9A10085E174 /* UIKit.framework */,
@@ -170,12 +175,11 @@
 		E23B9C9D1767A9A10085E174 /* Flickr Uploader */ = {
 			isa = PBXGroup;
 			children = (
+				E25F80D6176EC16B00328511 /* ViewControllers */,
 				E2DAFE37176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.h */,
 				E2DAFE38176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.m */,
 				E2DAFE39176DFC4000A5C316 /* MDAppDelegate.h */,
 				E2DAFE3A176DFC4000A5C316 /* MDAppDelegate.m */,
-				E2DAFE3B176DFC4000A5C316 /* MDFlickrAuthenticationViewController.h */,
-				E2DAFE3C176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m */,
 				E2DAFE3D176DFC4000A5C316 /* MDOAuthToken.h */,
 				E2DAFE3E176DFC4000A5C316 /* MDOAuthToken.m */,
 				E2DAFDB8176DF1DF00A5C316 /* json-framework */,
@@ -215,6 +219,17 @@
 				E23B9CBF1767A9A10085E174 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E25F80D6176EC16B00328511 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E2DAFE3B176DFC4000A5C316 /* MDFlickrAuthenticationViewController.h */,
+				E2DAFE3C176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m */,
+				E25F80D7176EC19400328511 /* MDFlickrUploaderMainViewController.h */,
+				E25F80D8176EC19400328511 /* MDFlickrUploaderMainViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		E2DAFD7B176DC74800A5C316 /* RXFlickr */ = {
@@ -401,6 +416,7 @@
 				E2DAFE35176DFC1700A5C316 /* RXFlickr.m in Sources */,
 				E2DAFE20176DFC0600A5C316 /* SBJsonParser.m in Sources */,
 				E2DAFE42176DFC4000A5C316 /* MDOAuthToken.m in Sources */,
+				E25F80D9176EC19400328511 /* MDFlickrUploaderMainViewController.m in Sources */,
 				E2DAFE23176DFC0600A5C316 /* SBJsonStreamParserAdapter.m in Sources */,
 				E2DAFE24176DFC0600A5C316 /* SBJsonStreamParserState.m in Sources */,
 				E2DAFE22176DFC0600A5C316 /* SBJsonStreamParserAccumulator.m in Sources */,
