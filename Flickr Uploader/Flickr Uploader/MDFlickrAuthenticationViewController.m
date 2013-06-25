@@ -53,6 +53,15 @@ static NSString* kCallbackURL = @"md://flickr/callback";
 {
     self.spinner.hidden = YES;
     self.authenticateButton.hidden = NO;
+    
+    UIViewController *uc = [[UIViewController alloc] init];
+    UIWebView *vw = [[UIWebView alloc] init];
+    uc.view = vw;
+    [_flickrAccount setWebView:vw];
+    
+    [self presentViewController:uc animated:YES completion:^{
+        [_flickrAccount startAuthorization];
+    }];
 }
 
 #pragma mark - RXFlickr Delegate
@@ -61,6 +70,7 @@ static NSString* kCallbackURL = @"md://flickr/callback";
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     [_oauthToken saveValue:[flickr token] andSecret:[flickr tokenSecret]];
+    [self performSegueWithIdentifier:@"authToMainSegue" sender:self];
 }
 
 - (void)flickrDidNotAuthorize:(RXFlickr *)flickr
@@ -71,15 +81,4 @@ static NSString* kCallbackURL = @"md://flickr/callback";
     [alert show];
 }
 
-
-- (IBAction)tappedAuthenticateButton:(id)sender {
-    UIViewController *uc = [[UIViewController alloc] init];
-    UIWebView *vw = [[UIWebView alloc] init];
-    uc.view = vw;
-    [_flickrAccount setWebView:vw];
-
-    [self presentViewController:uc animated:YES completion:^{
-       [_flickrAccount startAuthorization];
-    }];
-}
 @end

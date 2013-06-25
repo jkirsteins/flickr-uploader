@@ -15,6 +15,4 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIButton *authenticateButton;
 
-- (IBAction)tappedAuthenticateButton:(id)sender;
-
 @end

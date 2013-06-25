@@ -32,8 +32,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.navigationItem setLeftBarButtonItem:nil];
-//    [self.navigationItem hidesBackButton:YES];
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)didReceiveMemoryWarning
