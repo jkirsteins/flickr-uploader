@@ -19,6 +19,8 @@
 		E23B9CC11767A9A10085E174 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E23B9CBF1767A9A10085E174 /* InfoPlist.strings */; };
 		E23B9CC31767A9A10085E174 /* Flickr_UploaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B9CC21767A9A10085E174 /* Flickr_UploaderTests.m */; };
 		E25F80D9176EC19400328511 /* MDFlickrUploaderMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F80D8176EC19400328511 /* MDFlickrUploaderMainViewController.m */; };
+		E278217C177A25C80064278F /* UploadLog.m in Sources */ = {isa = PBXBuildFile; fileRef = E278217B177A25C80064278F /* UploadLog.m */; };
+		E2782180177A267C0064278F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E278217E177A267C0064278F /* Model.xcdatamodeld */; };
 		E2DAFE05176DFBF500A5C316 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE04176DFBF500A5C316 /* NSString+MD5.m */; };
 		E2DAFE1F176DFC0600A5C316 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE07176DFC0600A5C316 /* NSObject+SBJson.m */; };
 		E2DAFE20176DFC0600A5C316 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE0A176DFC0600A5C316 /* SBJsonParser.m */; };
@@ -71,6 +73,9 @@
 		E25F80D7176EC19400328511 /* MDFlickrUploaderMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDFlickrUploaderMainViewController.h; path = ViewControllers/MDFlickrUploaderMainViewController.h; sourceTree = "<group>"; };
 		E25F80D8176EC19400328511 /* MDFlickrUploaderMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDFlickrUploaderMainViewController.m; path = ViewControllers/MDFlickrUploaderMainViewController.m; sourceTree = "<group>"; };
 		E25F80DA176EC22800328511 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		E278217A177A25C80064278F /* UploadLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadLog.h; path = Model/UploadLog.h; sourceTree = "<group>"; };
+		E278217B177A25C80064278F /* UploadLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadLog.m; path = Model/UploadLog.m; sourceTree = "<group>"; };
+		E278217F177A267C0064278F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		E2DAFE03176DFBF500A5C316 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Utilities/NSString+MD5.h"; sourceTree = "<group>"; };
 		E2DAFE04176DFBF500A5C316 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "Utilities/NSString+MD5.m"; sourceTree = "<group>"; };
 		E2DAFE06176DFC0600A5C316 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -188,6 +193,7 @@
 				E23B9CAF1767A9A10085E174 /* Images.xcassets */,
 				E23B9C9E1767A9A10085E174 /* Supporting Files */,
 				E2DAFE48176DFE2D00A5C316 /* Storyboards */,
+				E278217D177A25D90064278F /* Model */,
 			);
 			path = "Flickr Uploader";
 			sourceTree = "<group>";
@@ -230,6 +236,16 @@
 				E25F80D8176EC19400328511 /* MDFlickrUploaderMainViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E278217D177A25D90064278F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E278217E177A267C0064278F /* Model.xcdatamodeld */,
+				E278217A177A25C80064278F /* UploadLog.h */,
+				E278217B177A25C80064278F /* UploadLog.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		E2DAFD7B176DC74800A5C316 /* RXFlickr */ = {
@@ -413,11 +429,13 @@
 				E2DAFE28176DFC0600A5C316 /* SBJsonTokeniser.m in Sources */,
 				E2DAFE2A176DFC0600A5C316 /* SBJsonWriter.m in Sources */,
 				E2DAFE41176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m in Sources */,
+				E278217C177A25C80064278F /* UploadLog.m in Sources */,
 				E2DAFE35176DFC1700A5C316 /* RXFlickr.m in Sources */,
 				E2DAFE20176DFC0600A5C316 /* SBJsonParser.m in Sources */,
 				E2DAFE42176DFC4000A5C316 /* MDOAuthToken.m in Sources */,
 				E25F80D9176EC19400328511 /* MDFlickrUploaderMainViewController.m in Sources */,
 				E2DAFE23176DFC0600A5C316 /* SBJsonStreamParserAdapter.m in Sources */,
+				E2782180177A267C0064278F /* Model.xcdatamodeld in Sources */,
 				E2DAFE24176DFC0600A5C316 /* SBJsonStreamParserState.m in Sources */,
 				E2DAFE22176DFC0600A5C316 /* SBJsonStreamParserAccumulator.m in Sources */,
 			);
@@ -630,6 +648,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E278217E177A267C0064278F /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E278217F177A267C0064278F /* Model.xcdatamodel */,
+			);
+			currentVersion = E278217F177A267C0064278F /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = Model/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E23B9C8C1767A9A10085E174 /* Project object */;
 }

@@ -19,7 +19,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+
     }
     return self;
 }
@@ -28,6 +28,12 @@
 {
     [super viewDidLoad];
 	[self loadPhotos];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationItem setLeftBarButtonItem:nil];
+//    [self.navigationItem hidesBackButton:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,7 +47,7 @@
 
 -(void)addPhoto:(ALAssetRepresentation *)asset
 {
-    NSLog(@"%@", [asset metadata]);
+//    NSLog(@"%@", [asset metadata]);
     NSLog(@"Adding photo: %@", [asset filename]);
 }
 
