@@ -21,6 +21,8 @@
 		E25F80D9176EC19400328511 /* MDFlickrUploaderMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F80D8176EC19400328511 /* MDFlickrUploaderMainViewController.m */; };
 		E278217C177A25C80064278F /* UploadLog.m in Sources */ = {isa = PBXBuildFile; fileRef = E278217B177A25C80064278F /* UploadLog.m */; };
 		E2782180177A267C0064278F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E278217E177A267C0064278F /* Model.xcdatamodeld */; };
+		E2782182177A2ABD0064278F /* beautiful_scenery-wide.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2782181177A2ABD0064278F /* beautiful_scenery-wide.jpg */; };
+		E2782185177A2C190064278F /* MDUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2782184177A2C190064278F /* MDUploadViewController.m */; };
 		E2DAFE05176DFBF500A5C316 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE04176DFBF500A5C316 /* NSString+MD5.m */; };
 		E2DAFE1F176DFC0600A5C316 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE07176DFC0600A5C316 /* NSObject+SBJson.m */; };
 		E2DAFE20176DFC0600A5C316 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE0A176DFC0600A5C316 /* SBJsonParser.m */; };
@@ -76,6 +78,9 @@
 		E278217A177A25C80064278F /* UploadLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadLog.h; path = Model/UploadLog.h; sourceTree = "<group>"; };
 		E278217B177A25C80064278F /* UploadLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadLog.m; path = Model/UploadLog.m; sourceTree = "<group>"; };
 		E278217F177A267C0064278F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		E2782181177A2ABD0064278F /* beautiful_scenery-wide.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "beautiful_scenery-wide.jpg"; path = "../../../Downloads/beautiful_scenery-wide.jpg"; sourceTree = "<group>"; };
+		E2782183177A2C190064278F /* MDUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDUploadViewController.h; path = ViewControllers/MDUploadViewController.h; sourceTree = "<group>"; };
+		E2782184177A2C190064278F /* MDUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDUploadViewController.m; path = ViewControllers/MDUploadViewController.m; sourceTree = "<group>"; };
 		E2DAFE03176DFBF500A5C316 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Utilities/NSString+MD5.h"; sourceTree = "<group>"; };
 		E2DAFE04176DFBF500A5C316 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "Utilities/NSString+MD5.m"; sourceTree = "<group>"; };
 		E2DAFE06176DFC0600A5C316 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -149,6 +154,7 @@
 		E23B9C8B1767A9A10085E174 = {
 			isa = PBXGroup;
 			children = (
+				E2782181177A2ABD0064278F /* beautiful_scenery-wide.jpg */,
 				E23B9C9D1767A9A10085E174 /* Flickr Uploader */,
 				E23B9CBC1767A9A10085E174 /* Flickr UploaderTests */,
 				E23B9C961767A9A10085E174 /* Frameworks */,
@@ -234,6 +240,8 @@
 				E2DAFE3C176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m */,
 				E25F80D7176EC19400328511 /* MDFlickrUploaderMainViewController.h */,
 				E25F80D8176EC19400328511 /* MDFlickrUploaderMainViewController.m */,
+				E2782183177A2C190064278F /* MDUploadViewController.h */,
+				E2782184177A2C190064278F /* MDUploadViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -392,6 +400,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2782182177A2ABD0064278F /* beautiful_scenery-wide.jpg in Resources */,
 				E23B9CB01767A9A10085E174 /* Images.xcassets in Resources */,
 				E2DAFE47176DFE2700A5C316 /* iPhone.storyboard in Resources */,
 				E23B9CA21767A9A10085E174 /* InfoPlist.strings in Resources */,
@@ -437,6 +446,7 @@
 				E2DAFE23176DFC0600A5C316 /* SBJsonStreamParserAdapter.m in Sources */,
 				E2782180177A267C0064278F /* Model.xcdatamodeld in Sources */,
 				E2DAFE24176DFC0600A5C316 /* SBJsonStreamParserState.m in Sources */,
+				E2782185177A2C190064278F /* MDUploadViewController.m in Sources */,
 				E2DAFE22176DFC0600A5C316 /* SBJsonStreamParserAccumulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
