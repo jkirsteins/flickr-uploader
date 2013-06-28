@@ -18,10 +18,14 @@
 		E23B9CB91767A9A10085E174 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23B9C9B1767A9A10085E174 /* UIKit.framework */; };
 		E23B9CC11767A9A10085E174 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E23B9CBF1767A9A10085E174 /* InfoPlist.strings */; };
 		E23B9CC31767A9A10085E174 /* Flickr_UploaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B9CC21767A9A10085E174 /* Flickr_UploaderTests.m */; };
+		E249E414177C0EC700F55D7C /* MDCurrentlyProcessingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E249E413177C0EC700F55D7C /* MDCurrentlyProcessingCell.m */; };
+		E249E417177C13EE00F55D7C /* MDQueuedPictureCell4.m in Sources */ = {isa = PBXBuildFile; fileRef = E249E416177C13EE00F55D7C /* MDQueuedPictureCell4.m */; };
+		E24D2B26177CC73A00E4D58E /* MDUploadQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E24D2B25177CC73A00E4D58E /* MDUploadQueueViewController.m */; };
 		E278217C177A25C80064278F /* UploadLog.m in Sources */ = {isa = PBXBuildFile; fileRef = E278217B177A25C80064278F /* UploadLog.m */; };
 		E2782180177A267C0064278F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E278217E177A267C0064278F /* Model.xcdatamodeld */; };
 		E2782182177A2ABD0064278F /* beautiful_scenery-wide.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2782181177A2ABD0064278F /* beautiful_scenery-wide.jpg */; };
 		E2782185177A2C190064278F /* MDUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2782184177A2C190064278F /* MDUploadViewController.m */; };
+		E29EAE7F177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E29EAE7E177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.m */; };
 		E2DAFE05176DFBF500A5C316 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE04176DFBF500A5C316 /* NSString+MD5.m */; };
 		E2DAFE1F176DFC0600A5C316 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE07176DFC0600A5C316 /* NSObject+SBJson.m */; };
 		E2DAFE20176DFC0600A5C316 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE0A176DFC0600A5C316 /* SBJsonParser.m */; };
@@ -71,6 +75,12 @@
 		E23B9CBE1767A9A10085E174 /* Flickr UploaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Flickr UploaderTests-Info.plist"; sourceTree = "<group>"; };
 		E23B9CC01767A9A10085E174 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E23B9CC21767A9A10085E174 /* Flickr_UploaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Flickr_UploaderTests.m; sourceTree = "<group>"; };
+		E249E412177C0EC700F55D7C /* MDCurrentlyProcessingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDCurrentlyProcessingCell.h; path = TableViewCells/MDCurrentlyProcessingCell.h; sourceTree = "<group>"; };
+		E249E413177C0EC700F55D7C /* MDCurrentlyProcessingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDCurrentlyProcessingCell.m; path = TableViewCells/MDCurrentlyProcessingCell.m; sourceTree = "<group>"; };
+		E249E415177C13EE00F55D7C /* MDQueuedPictureCell4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDQueuedPictureCell4.h; path = TableViewCells/MDQueuedPictureCell4.h; sourceTree = "<group>"; };
+		E249E416177C13EE00F55D7C /* MDQueuedPictureCell4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDQueuedPictureCell4.m; path = TableViewCells/MDQueuedPictureCell4.m; sourceTree = "<group>"; };
+		E24D2B24177CC73A00E4D58E /* MDUploadQueueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDUploadQueueViewController.h; path = ViewControllers/MDUploadQueueViewController.h; sourceTree = "<group>"; };
+		E24D2B25177CC73A00E4D58E /* MDUploadQueueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDUploadQueueViewController.m; path = ViewControllers/MDUploadQueueViewController.m; sourceTree = "<group>"; };
 		E25F80DA176EC22800328511 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E278217A177A25C80064278F /* UploadLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadLog.h; path = Model/UploadLog.h; sourceTree = "<group>"; };
 		E278217B177A25C80064278F /* UploadLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadLog.m; path = Model/UploadLog.m; sourceTree = "<group>"; };
@@ -78,6 +88,8 @@
 		E2782181177A2ABD0064278F /* beautiful_scenery-wide.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "beautiful_scenery-wide.jpg"; path = "../../../Downloads/beautiful_scenery-wide.jpg"; sourceTree = "<group>"; };
 		E2782183177A2C190064278F /* MDUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDUploadViewController.h; path = ViewControllers/MDUploadViewController.h; sourceTree = "<group>"; };
 		E2782184177A2C190064278F /* MDUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDUploadViewController.m; path = ViewControllers/MDUploadViewController.m; sourceTree = "<group>"; };
+		E29EAE7D177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		E29EAE7E177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		E2DAFE03176DFBF500A5C316 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Utilities/NSString+MD5.h"; sourceTree = "<group>"; };
 		E2DAFE04176DFBF500A5C316 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "Utilities/NSString+MD5.m"; sourceTree = "<group>"; };
 		E2DAFE06176DFC0600A5C316 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -183,6 +195,9 @@
 		E23B9C9D1767A9A10085E174 /* Flickr Uploader */ = {
 			isa = PBXGroup;
 			children = (
+				E29EAE7C177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout */,
+				E24D2B27177CC75400E4D58E /* CollectionViewCells */,
+				E249E411177C0E9700F55D7C /* TableViewCells */,
 				E25F80D6176EC16B00328511 /* ViewControllers */,
 				E2DAFE37176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.h */,
 				E2DAFE38176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.m */,
@@ -230,6 +245,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E249E411177C0E9700F55D7C /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				E249E412177C0EC700F55D7C /* MDCurrentlyProcessingCell.h */,
+				E249E413177C0EC700F55D7C /* MDCurrentlyProcessingCell.m */,
+				E249E415177C13EE00F55D7C /* MDQueuedPictureCell4.h */,
+				E249E416177C13EE00F55D7C /* MDQueuedPictureCell4.m */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		E24D2B27177CC75400E4D58E /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CollectionViewCells;
+			sourceTree = "<group>";
+		};
 		E25F80D6176EC16B00328511 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +270,8 @@
 				E2DAFE3C176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m */,
 				E2782183177A2C190064278F /* MDUploadViewController.h */,
 				E2782184177A2C190064278F /* MDUploadViewController.m */,
+				E24D2B24177CC73A00E4D58E /* MDUploadQueueViewController.h */,
+				E24D2B25177CC73A00E4D58E /* MDUploadQueueViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -249,6 +284,15 @@
 				E278217B177A25C80064278F /* UploadLog.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E29EAE7C177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				E29EAE7D177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.h */,
+				E29EAE7E177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.m */,
+			);
+			path = LXReorderableCollectionViewFlowLayout;
 			sourceTree = "<group>";
 		};
 		E2DAFD7B176DC74800A5C316 /* RXFlickr */ = {
@@ -425,12 +469,15 @@
 				E2DAFE05176DFBF500A5C316 /* NSString+MD5.m in Sources */,
 				E2DAFE36176DFC1700A5C316 /* RXFlickr+checkToken.m in Sources */,
 				E23B9CA41767A9A10085E174 /* main.m in Sources */,
+				E29EAE7F177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				E2DAFE3F176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.m in Sources */,
 				E2DAFE25176DFC0600A5C316 /* SBJsonStreamWriter.m in Sources */,
 				E2DAFE34176DFC1700A5C316 /* NSString+URLEncodeString.m in Sources */,
 				E2DAFE26176DFC0600A5C316 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				E2DAFE29176DFC0600A5C316 /* SBJsonUTF8Stream.m in Sources */,
 				E2DAFE28176DFC0600A5C316 /* SBJsonTokeniser.m in Sources */,
+				E24D2B26177CC73A00E4D58E /* MDUploadQueueViewController.m in Sources */,
+				E249E417177C13EE00F55D7C /* MDQueuedPictureCell4.m in Sources */,
 				E2DAFE2A176DFC0600A5C316 /* SBJsonWriter.m in Sources */,
 				E2DAFE41176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m in Sources */,
 				E278217C177A25C80064278F /* UploadLog.m in Sources */,
@@ -439,6 +486,7 @@
 				E2DAFE42176DFC4000A5C316 /* MDOAuthToken.m in Sources */,
 				E2DAFE23176DFC0600A5C316 /* SBJsonStreamParserAdapter.m in Sources */,
 				E2782180177A267C0064278F /* Model.xcdatamodeld in Sources */,
+				E249E414177C0EC700F55D7C /* MDCurrentlyProcessingCell.m in Sources */,
 				E2DAFE24176DFC0600A5C316 /* SBJsonStreamParserState.m in Sources */,
 				E2782185177A2C190064278F /* MDUploadViewController.m in Sources */,
 				E2DAFE22176DFC0600A5C316 /* SBJsonStreamParserAccumulator.m in Sources */,

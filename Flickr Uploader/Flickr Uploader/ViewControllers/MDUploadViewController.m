@@ -7,10 +7,13 @@
 //
 
 #import "MDUploadViewController.h"
+#import "MDCurrentlyProcessingCell.h"
+#import "MDQueuedPictureCell4.h"
 @import AssetsLibrary;
 
 @interface MDUploadViewController ()
 @property (nonatomic,strong) NSMutableArray *photos;
+@property (nonatomic,strong) NSMutableArray *thumbnailCache;
 @property (nonatomic,strong) ALAssetsLibrary *library;
 @end
 
@@ -39,23 +42,23 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [MDQueuedPictureCell4 removeAllExceptVisible:self.tableView.visibleCells];
 }
 
 #pragma mark -
 #pragma mark Asset access
 
--(void)addPhoto:(ALAssetRepresentation *)asset
+-(void)addPhoto:(ALAsset *)asset
 {
-    NSLog(@"Adding photo: %@", [asset filename]);
     [self.photos addObject:asset];
-    [self.tableView reloadData];
+
 }
 
 -(void)loadPhotos
 {
     self.library = [[ALAssetsLibrary alloc] init];
     self.photos = [[NSMutableArray alloc] init];
+    self.thumbnailCache = [[NSMutableArray alloc] init];
     
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
@@ -69,11 +72,12 @@
                   // The end of the enumeration is signaled by asset == nil.
                   if (alAsset)
                   {
-                      ALAssetRepresentation *representation = [alAsset defaultRepresentation];
-                      [self addPhoto:representation];
+//                      ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                      [self addPhoto:alAsset];
                   }
                   else
                   {
+                    [self.tableView reloadData];
                       NSLog(@"Done! Photo count: %lu.", ((unsigned long)[self.photos count]));
                   }
               }];
@@ -90,47 +94,95 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0)
+    if (indexPath.section == 0)
         return 245.0f;
     
-    return 110.0f;//[super tableView:tableView heightForRowAtIndexPath:indexPath];
+    return 80.0f;//[super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"Returning number of rows in section: %lu", ((unsigned long)[self.photos count]));
-    return [self.photos count];
+    if (section == 0)
+        return (self.photos.count > 0 ? 1 : 0);
+    
+    NSLog(@"Photo count: %d", self.photos.count);
+    int res = self.photos.count > 1 ? ceil((self.photos.count-1)/4.0f) : 0;
+    NSLog(@"Section 1 rows: %d", res);
+    return res;
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    NSArray *visibleCells = [self.tableView visibleCells];
+    [visibleCells enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MDQueuedPictureCell4 *cell = (MDQueuedPictureCell4 *)obj;
+        
+        CGPoint cellPos = [cell convertPoint:CGPointZero toView:scrollView];
+        NSIndexPath *indexPath = [(UITableView*)scrollView indexPathForRowAtPoint:cellPos];
+        if (indexPath.section == 1)
+        {
+
+        int skipAssets = MAX(indexPath.row*4,0)+1;
+        for (int i = 0; i < 4; ++i)
+        {
+            int ix = skipAssets+i;
+            if (ix < [self.photos count])
+            {
+                ALAsset *asset = [self.photos objectAtIndex:ix];
+                [cell setThumbnail:asset atIndex:i andGeneration:cell.generation fromCacheOnly:NO];
+            }
+        }
+            
+        }
+    }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = nil;
+    int skipAssets = MAX(indexPath.row*4, 0);
     
-    ALAssetRepresentation *cellAsset = [self.photos objectAtIndex:indexPath.row];
-    
-    if (indexPath.row == 0)
+    if (indexPath.section == 0)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"currentlyProcessingCell" forIndexPath:indexPath];
-        NSLog(@"Returning main cell: %@", cell);
+        MDCurrentlyProcessingCell *cell = (MDCurrentlyProcessingCell*)[tableView dequeueReusableCellWithIdentifier:@"currentlyProcessingCell" forIndexPath:indexPath];
+        
+        ALAsset *asset = [self.photos objectAtIndex:skipAssets];
+        [cell setThumbnail:[asset aspectRatioThumbnail]];
+        return cell;
     }
     else
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"queueCell" forIndexPath:indexPath];
-        //[cell.textLabel setText:cellAsset.filename];
-        //NSLog(@"Setting cell (%@) title to %@", cell, cell.textLabel.text);
+        MDQueuedPictureCell4 *cell = (MDQueuedPictureCell4*)[tableView dequeueReusableCellWithIdentifier:@"queueCell" forIndexPath:indexPath];
+        cell.generation += 1;
+        
+        for (int i = 0; i < 4; ++i)
+        {
+            UIImageView *imgView = [[cell thumbnails] objectAtIndex:i];
+//            [imgView setBackgroundColor:[UIColor grayColor]];
+            imgView.image = nil; // load from cache here, and invalidate unused entries on memory warning
+            
+            int ix = skipAssets+i+1;
+            if (ix < [self.photos count])
+            {
+                ALAsset *asset = [self.photos objectAtIndex:ix];
+                if (!tableView.decelerating)
+                {
+                    [cell setThumbnail:asset atIndex:i andGeneration:cell.generation fromCacheOnly:NO];
+                }
+                else
+                {
+                    [cell setThumbnail:asset atIndex:i andGeneration:cell.generation fromCacheOnly:YES];
+                }
+            }
+        }
+        
+        
+        return cell;
     }
-    
-    id vwt = [cell.contentView viewWithTag:1];
-    UIImageView *imageView = (UIImageView*)(vwt);
-    imageView.image = [UIImage imageWithCGImage:cellAsset.fullResolutionImage];
-    
-    
-    return cell;
 }
 
 /*
