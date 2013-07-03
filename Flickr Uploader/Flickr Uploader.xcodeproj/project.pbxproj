@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E22A665917830644001224F7 /* MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A665817830644001224F7 /* MDAssetQueue.m */; };
+		E23B15F4178457B200888DEB /* ALAsset+MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */; };
+		E23B15F61784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */; };
 		E23B9C981767A9A10085E174 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23B9C971767A9A10085E174 /* Foundation.framework */; };
 		E23B9C9A1767A9A10085E174 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23B9C991767A9A10085E174 /* CoreGraphics.framework */; };
 		E23B9C9C1767A9A10085E174 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23B9C9B1767A9A10085E174 /* UIKit.framework */; };
@@ -92,6 +94,9 @@
 /* Begin PBXFileReference section */
 		E22A665717830644001224F7 /* MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAssetQueue.h; sourceTree = "<group>"; };
 		E22A665817830644001224F7 /* MDAssetQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAssetQueue.m; sourceTree = "<group>"; };
+		E23B15F2178457B200888DEB /* ALAsset+MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+MDAssetQueue.h"; sourceTree = "<group>"; };
+		E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+MDAssetQueue.m"; sourceTree = "<group>"; };
+		E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAssetCategoryMDAssetQueueTests.m; sourceTree = "<group>"; };
 		E23B9C941767A9A10085E174 /* Flickr Uploader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flickr Uploader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E23B9C971767A9A10085E174 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E23B9C991767A9A10085E174 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -305,6 +310,8 @@
 				E278217D177A25D90064278F /* Model */,
 				E22A665717830644001224F7 /* MDAssetQueue.h */,
 				E22A665817830644001224F7 /* MDAssetQueue.m */,
+				E23B15F2178457B200888DEB /* ALAsset+MDAssetQueue.h */,
+				E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */,
 			);
 			path = "Flickr Uploader";
 			sourceTree = "<group>";
@@ -325,6 +332,7 @@
 			children = (
 				E23B9CC21767A9A10085E174 /* Flickr_UploaderTests.m */,
 				E26C02BC17840AC500EB8300 /* MDAssetQueueTests.m */,
+				E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */,
 				E23B9CBD1767A9A10085E174 /* Supporting Files */,
 			);
 			path = "Flickr UploaderTests";
@@ -666,6 +674,7 @@
 				E2DAFE05176DFBF500A5C316 /* NSString+MD5.m in Sources */,
 				E26C036217840C9700EB8300 /* NSManagedObject+MagicalFinders.m in Sources */,
 				E2DAFE36176DFC1700A5C316 /* RXFlickr+checkToken.m in Sources */,
+				E23B15F4178457B200888DEB /* ALAsset+MDAssetQueue.m in Sources */,
 				E23B9CA41767A9A10085E174 /* main.m in Sources */,
 				E26C036417840C9700EB8300 /* NSManagedObject+MagicalRecord.m in Sources */,
 				E26C037A17840C9700EB8300 /* MagicalRecord+iCloud.m in Sources */,
@@ -720,6 +729,7 @@
 			files = (
 				E23B9CC31767A9A10085E174 /* Flickr_UploaderTests.m in Sources */,
 				E26C02BD17840AC500EB8300 /* MDAssetQueueTests.m in Sources */,
+				E23B15F61784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

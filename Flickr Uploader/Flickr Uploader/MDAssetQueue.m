@@ -7,6 +7,7 @@
 //
 
 #import "MDAssetQueue.h"
+#import "ALAsset+MDAssetQueue.h"
 
 @interface MDAssetQueue()
 
@@ -29,7 +30,7 @@
 }
 
 #pragma mark -
-#pragma mark Internal methods
+#pragma mark Internal instance methods
 
 -(BOOL)isAssetNew:(ALAsset*)asset
 {
