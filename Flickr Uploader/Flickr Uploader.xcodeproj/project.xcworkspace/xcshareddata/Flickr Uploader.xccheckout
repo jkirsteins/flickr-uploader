@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>D2061B0D-3135-49EA-BA1B-042B524B167A</string>
+	<string>4009C53A-8F75-4F93-AC36-AACC4C8DE00B</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Flickr Uploader</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>A438CA68-1AB6-4C62-898D-7ABAF41E3627</key>
+		<key>9D4B825D-8DD5-448E-8C8D-A2C4C0447BAD</key>
 		<string>ssh://github.com/kirsis/flickr-uploader.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Flickr Uploader/Flickr Uploader.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>A438CA68-1AB6-4C62-898D-7ABAF41E3627</key>
+		<key>9D4B825D-8DD5-448E-8C8D-A2C4C0447BAD</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -23,14 +23,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>A438CA68-1AB6-4C62-898D-7ABAF41E3627</string>
+	<string>9D4B825D-8DD5-448E-8C8D-A2C4C0447BAD</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>A438CA68-1AB6-4C62-898D-7ABAF41E3627</string>
+			<string>9D4B825D-8DD5-448E-8C8D-A2C4C0447BAD</string>
 			<key>IDESourceControlWCCName</key>
 			<string>flickr-uploader</string>
 		</dict>

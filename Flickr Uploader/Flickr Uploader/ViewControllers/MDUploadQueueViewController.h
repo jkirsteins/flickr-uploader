@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "LXReorderableCollectionViewFlowLayout.h"
+#import "MDAssetQueue.h"
 
-@interface MDUploadQueueViewController : UICollectionViewController<LXReorderableCollectionViewDataSource, LXReorderableCollectionViewDelegateFlowLayout>
+@interface MDUploadQueueViewController : UICollectionViewController<LXReorderableCollectionViewDelegateFlowLayout,LXReorderableCollectionViewDataSource>
+
+@property (strong, nonatomic) IBOutlet MDAssetQueue *uploadQueue;
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 

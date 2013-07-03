@@ -14,11 +14,11 @@
 
 @implementation MDUploadQueueViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)decoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithCoder:decoder];
     if (self) {
-        // Custom initialization
+
     }
     return self;
 }
@@ -26,7 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"small"];
 }
 
@@ -39,10 +38,10 @@
 #pragma mark - LXReorderableCollectionViewDataSource methods
 
 - (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
-//    PlayingCard *playingCard = [self.deck objectAtIndex:fromIndexPath.item];
+    //    PlayingCard *playingCard = [self.deck objectAtIndex:fromIndexPath.item];
     
-//    [self.deck removeObjectAtIndex:fromIndexPath.item];
-//    [self.deck insertObject:playingCard atIndex:toIndexPath.item];
+    //    [self.deck removeObjectAtIndex:fromIndexPath.item];
+    //    [self.deck insertObject:playingCard atIndex:toIndexPath.item];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -53,32 +52,23 @@
     return fromIndexPath.section == toIndexPath.section;
 }
 
-#pragma mark - LXReorderableCollectionViewDelegateFlowLayout methods
+#pragma mark - UICollectionView Datasource
 
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"will begin drag");
-}
-
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"did begin drag");
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
+    if (section == 0) return 1;
+    return 13;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"will end drag");
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
+    return 2;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"did end drag");
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"small" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor grayColor];
+    return cell;
 }
 
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TODO: Select Item
-}
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: Deselect item
-}
 
 #pragma mark – UICollectionViewDelegateFlowLayout
 
@@ -110,23 +100,6 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 2.0f;
-}
-
-#pragma mark - UICollectionView Datasource
-// 1
-- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    if (section == 0) return 1;
-    return 8;
-}
-// 2
-- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
-    return 2;
-}
-// 3
-- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"small" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor grayColor];
-    return cell;
 }
 
 @end
