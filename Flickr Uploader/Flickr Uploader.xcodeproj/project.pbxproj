@@ -78,6 +78,8 @@
 		E2DAFE41176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE3C176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m */; };
 		E2DAFE42176DFC4000A5C316 /* MDOAuthToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE3E176DFC4000A5C316 /* MDOAuthToken.m */; };
 		E2DAFE47176DFE2700A5C316 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2DAFE46176DFE2700A5C316 /* iPhone.storyboard */; };
+		E2E9BBBA1784B6BB00C9797B /* MDAssetImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E9BBB91784B6BB00C9797B /* MDAssetImageCache.m */; };
+		E2E9BBBF1784BD7F00C9797B /* MDAssetImageCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E9BBBE1784BD7F00C9797B /* MDAssetImageCacheTests.m */; };
 		E2F2C443177F798500528D02 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F2C441177F793600528D02 /* libOCMock.a */; };
 /* End PBXBuildFile section */
 
@@ -225,6 +227,9 @@
 		E2DAFE3D176DFC4000A5C316 /* MDOAuthToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDOAuthToken.h; sourceTree = "<group>"; };
 		E2DAFE3E176DFC4000A5C316 /* MDOAuthToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDOAuthToken.m; sourceTree = "<group>"; };
 		E2DAFE46176DFE2700A5C316 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iPhone.storyboard; path = Storyboards/iPhone.storyboard; sourceTree = "<group>"; };
+		E2E9BBB81784B6BB00C9797B /* MDAssetImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAssetImageCache.h; sourceTree = "<group>"; };
+		E2E9BBB91784B6BB00C9797B /* MDAssetImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAssetImageCache.m; sourceTree = "<group>"; };
+		E2E9BBBE1784BD7F00C9797B /* MDAssetImageCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAssetImageCacheTests.m; sourceTree = "<group>"; };
 		E2F2C441177F793600528D02 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = usr/lib/libOCMock.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -312,6 +317,8 @@
 				E22A665817830644001224F7 /* MDAssetQueue.m */,
 				E23B15F2178457B200888DEB /* ALAsset+MDAssetQueue.h */,
 				E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */,
+				E2E9BBB81784B6BB00C9797B /* MDAssetImageCache.h */,
+				E2E9BBB91784B6BB00C9797B /* MDAssetImageCache.m */,
 			);
 			path = "Flickr Uploader";
 			sourceTree = "<group>";
@@ -334,6 +341,7 @@
 				E26C02BC17840AC500EB8300 /* MDAssetQueueTests.m */,
 				E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */,
 				E23B9CBD1767A9A10085E174 /* Supporting Files */,
+				E2E9BBBE1784BD7F00C9797B /* MDAssetImageCacheTests.m */,
 			);
 			path = "Flickr UploaderTests";
 			sourceTree = "<group>";
@@ -693,6 +701,7 @@
 				E26C035E17840C9700EB8300 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				E2DAFE29176DFC0600A5C316 /* SBJsonUTF8Stream.m in Sources */,
 				E2DAFE28176DFC0600A5C316 /* SBJsonTokeniser.m in Sources */,
+				E2E9BBBA1784B6BB00C9797B /* MDAssetImageCache.m in Sources */,
 				E24D2B26177CC73A00E4D58E /* MDUploadQueueViewController.m in Sources */,
 				E26C035C17840C9700EB8300 /* NSString+MagicalDataImport.m in Sources */,
 				E26C035417840C9700EB8300 /* NSEntityDescription+MagicalDataImport.m in Sources */,
@@ -729,6 +738,7 @@
 			files = (
 				E23B9CC31767A9A10085E174 /* Flickr_UploaderTests.m in Sources */,
 				E26C02BD17840AC500EB8300 /* MDAssetQueueTests.m in Sources */,
+				E2E9BBBF1784BD7F00C9797B /* MDAssetImageCacheTests.m in Sources */,
 				E23B15F61784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

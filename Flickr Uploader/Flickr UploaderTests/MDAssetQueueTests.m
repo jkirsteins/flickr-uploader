@@ -57,7 +57,7 @@
 }
 
 #pragma mark -
-#pragma mark testAddAssetToQueueIfNotProcessed
+#pragma mark addAssetToQueueIfNotProcessed
 
 - (void)testAddAssetToQueueIfNotProcessed_addNewAssetToEmptyQueue_becomesFirstAsset
 {
