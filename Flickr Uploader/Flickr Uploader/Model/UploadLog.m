@@ -11,6 +11,6 @@
 
 @implementation UploadLog
 
-@dynamic base64ByteHash;
+@dynamic byteHashString;
 
 @end

@@ -8,12 +8,14 @@
 
 #import "MDAssetQueue.h"
 #import "ALAsset+MDAssetQueue.h"
+#import "UploadLog.h"
 
 @interface MDAssetQueue()
 
 @property (strong,nonatomic) NSMutableArray *orderedAssets;
 
--(BOOL)isAssetNew:(ALAsset*)asset;
+-(BOOL)hasAssetBeenProcessed:(ALAsset*)asset;
+-(void)markAssetProcessed:(ALAsset*)asset;
 -(void)addAssetToQueue:(ALAsset*)asset;
 
 @end
@@ -32,9 +34,22 @@
 #pragma mark -
 #pragma mark Internal instance methods
 
--(BOOL)isAssetNew:(ALAsset*)asset
+-(void)markAssetProcessed:(ALAsset *)asset
 {
-    return YES;
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    
+    UploadLog *logEntry = [UploadLog MR_createInContext:localContext];
+    logEntry.byteHashString = [asset MD_createOrReturnHashedIdentifier];
+    [localContext MR_saveToPersistentStoreAndWait];
+}
+
+-(BOOL)hasAssetBeenProcessed:(ALAsset*)asset
+{
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"byteHashString = %@", [asset MD_createOrReturnHashedIdentifier]];
+    uint count = [UploadLog MR_countOfEntitiesWithPredicate:predicate inContext:localContext];
+    
+    return count != 0;
 }
 
 -(void)addAssetToQueue:(ALAsset *)asset
@@ -50,23 +65,25 @@
     return [self.orderedAssets count];
 }
 
--(void)addAssetToQueueIfNew:(ALAsset *)asset
+-(void)addAssetToQueueIfNotProcessed:(ALAsset *)asset
 {
-    if (![self isAssetNew:asset]) return;
+    if ([self hasAssetBeenProcessed:asset]) return;
     [self addAssetToQueue:asset];
 }
 
--(void)shiftAssetFromQueue
+-(void)shiftAssetAndMarkProcessed
 {
     if ([self.orderedAssets count] < 1)
         return;
     
+    ALAsset *asset = (ALAsset*)self.orderedAssets[0];
+    [self markAssetProcessed:asset];
     [self.orderedAssets removeObjectAtIndex:0];
 }
 
 -(ALAsset*)firstAsset
 {
-    if (self.count < 1) return nil;
+    if (self.orderedAssets.count < 1) return nil;
     return (ALAsset*)[self.orderedAssets objectAtIndex:0];
 }
 

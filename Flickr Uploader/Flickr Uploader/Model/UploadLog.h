@@ -12,6 +12,6 @@
 
 @interface UploadLog : NSManagedObject
 
-@property (nonatomic, retain) NSString * base64ByteHash;
+@property (nonatomic, retain) NSString * byteHashString;
 
 @end

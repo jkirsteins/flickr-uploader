@@ -46,59 +46,49 @@
 }
 
 #pragma mark -
-#pragma mark addAssetToQueueIfNew
+#pragma mark testAddAssetToQueueIfNotProcessed
 
-- (void)testAddAssetToQueueIfNew_addNewAssetToEmptyQueue_becomesFirstAsset
+- (void)testAddAssetToQueueIfNotProcessed_addNewAssetToEmptyQueue_becomesFirstAsset
 {
     ALAsset *asset = [[ALAsset alloc] init];
-    [self.queue addAssetToQueueIfNew:asset];
+    [self.queue addAssetToQueueIfNotProcessed:asset];
     XCTAssertEqualObjects([self.queue firstAsset], asset,
                   @"Expected -[firstAsset] to return added asset.");
 }
 
-- (void)testAddAssetToQueueIfNew_addNewAssetToNonEmptyQueue_doesNotBecomeFirstAsset
+- (void)testAddAssetToQueueIfNotProcessed_addNewAssetToNonEmptyQueue_doesNotBecomeFirstAsset
 {
     ALAsset *firstAsset = [[ALAsset alloc] init];
     ALAsset *secondAsset = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNew:firstAsset];
-    [self.queue addAssetToQueueIfNew:secondAsset];
+    [self.queue addAssetToQueueIfNotProcessed:firstAsset];
+    [self.queue addAssetToQueueIfNotProcessed:secondAsset];
     
     XCTAssertTrue([self.queue firstAsset] == firstAsset,
                   @"Expected -[firstAsset] to return the first asset.");
 }
 
-- (void)testAddAssetToQueueIfNew_addSameAssetTwiceInSameCoreDataSession_addsOnlyOnce
+- (void)testAddAssetToQueueIfNotProcessed_addProcessedAssetToSameQueueInstance_addsOnlyOnce
 {
     ALAsset *asset = [[ALAsset alloc] init];
 
-    [self.queue addAssetToQueueIfNew:asset];
-    [self.queue addAssetToQueueIfNew:asset];
-    XCTAssertEquals([self.queue count], (NSUInteger)1,
+    [self.queue addAssetToQueueIfNotProcessed:asset];
+    [self.queue shiftAssetAndMarkProcessed];
+    [self.queue addAssetToQueueIfNotProcessed:asset];
+    XCTAssertEquals([self.queue count], (NSUInteger)0,
                   @"Expected -[count] to return 1 after adding same asset twice (in the same Core Data session).");
 }
 
-- (void)testAddAssetToQueueIfNew_addSameAssetTwiceInTwoCoreDataSessions_addsOnlyOnce
+- (void)testAddAssetToQueueIfNotProcessed_addProcessedAssetToDifferentQueueInstances_addsOnlyOnce
 {
-    const NSString *storeName = @"storeName";
-    
-    [MagicalRecord cleanUp];    // stop using the in-memory store
-    [MagicalRecord setupCoreDataStackWithStoreNamed:(NSString*)storeName];
-
     ALAsset *asset = [[ALAsset alloc] init];
-    [self.queue addAssetToQueueIfNew:asset];
-
-    [MagicalRecord cleanUp];    // simulate a new session
-    [MagicalRecord setupCoreDataStackWithStoreNamed:@"diff name on purpose to see if test works"/*(NSString*)storeName*/];
+    [self.queue addAssetToQueueIfNotProcessed:asset];
+    [self.queue shiftAssetAndMarkProcessed];
     
-    [self.queue addAssetToQueueIfNew:asset];
+    MDAssetQueue *queue2 = [[MDAssetQueue alloc] init];
+    [queue2 addAssetToQueueIfNotProcessed:asset];
 
-    XCTAssertEquals([self.queue count], (NSUInteger)1, @"Expected -[count] to return 1 after adding same asset twice (in two Core Data sessions).");
-    
-    // cleanup and delete the store
-    [MagicalRecord cleanUp];
-    NSURL *url = [NSPersistentStore MR_urlForStoreName:(NSString*)storeName];
-    [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
+    XCTAssertEquals([queue2 count], (NSUInteger)0, @"Expected -[count] to return 0 after adding an asset that was processed in a different MDAssetQueue instance.");
 }
 
 #pragma mark -
@@ -112,7 +102,7 @@
 
 -(void)testCount_callOnNonEmptyQueue_returnsAssetCount
 {
-    [self.queue addAssetToQueueIfNew:[[ALAsset alloc]init]];
+    [self.queue addAssetToQueueIfNotProcessed:[[ALAsset alloc]init]];
     XCTAssertTrue([self.queue count] == 1,
                   @"Expected -[count] to return 1 after adding an item.");
 }
@@ -122,15 +112,15 @@
 
 -(void)testShiftAssetFromQueue_callOnEmptyQueue_doesNothing
 {
-    [self.queue shiftAssetFromQueue];
+    [self.queue shiftAssetAndMarkProcessed];
     XCTAssertEquals([self.queue count], (NSUInteger)0, @"Expected -[count] to return 0.");
 }
 
 -(void)testShiftAssetFromQueue_callOnNonEmptyQueue_removesItem
 {
     ALAsset *asset = [[ALAsset alloc] init];
-    [self.queue addAssetToQueueIfNew:asset];
-    [self.queue shiftAssetFromQueue];
+    [self.queue addAssetToQueueIfNotProcessed:asset];
+    [self.queue shiftAssetAndMarkProcessed];
     XCTAssertEquals([self.queue count], (NSUInteger)0, @"Expected -[count] to return 0.");
 }
 
@@ -147,8 +137,8 @@
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNew:firstItem];
-    [self.queue addAssetToQueueIfNew:secondItem];
+    [self.queue addAssetToQueueIfNotProcessed:firstItem];
+    [self.queue addAssetToQueueIfNotProcessed:secondItem];
     
     XCTAssertEqualObjects([self.queue firstAsset], firstItem,
                           @"Expected -[firstAsset] to return firstItem.");
@@ -162,8 +152,8 @@
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNew:firstItem];
-    [self.queue addAssetToQueueIfNew:secondItem];
+    [self.queue addAssetToQueueIfNotProcessed:firstItem];
+    [self.queue addAssetToQueueIfNotProcessed:secondItem];
     
     XCTAssertTrue([self.queue moveAssetFromIndex:0 toIndex:1],
                   @"Expected -[moveAssetFromIndex:toIndex:] to return true.");
@@ -176,8 +166,8 @@
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNew:firstItem];
-    [self.queue addAssetToQueueIfNew:secondItem];
+    [self.queue addAssetToQueueIfNotProcessed:firstItem];
+    [self.queue addAssetToQueueIfNotProcessed:secondItem];
     
     XCTAssertTrue([self.queue moveAssetFromIndex:1 toIndex:0],
                   @"Expected -[moveAssetFromIndex:toIndex:] to return true.");
@@ -190,8 +180,8 @@
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNew:firstItem];
-    [self.queue addAssetToQueueIfNew:secondItem];
+    [self.queue addAssetToQueueIfNotProcessed:firstItem];
+    [self.queue addAssetToQueueIfNotProcessed:secondItem];
     
     XCTAssertFalse([self.queue moveAssetFromIndex:0 toIndex:2],
                   @"Expected -[moveAssetFromIndex:toIndex:] to return false.");
@@ -204,8 +194,8 @@
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNew:firstItem];
-    [self.queue addAssetToQueueIfNew:secondItem];
+    [self.queue addAssetToQueueIfNotProcessed:firstItem];
+    [self.queue addAssetToQueueIfNotProcessed:secondItem];
     
     XCTAssertFalse([self.queue moveAssetFromIndex:2 toIndex:0],
                    @"Expected -[moveAssetFromIndex:toIndex:] to return false.");
@@ -218,8 +208,8 @@
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNew:firstItem];
-    [self.queue addAssetToQueueIfNew:secondItem];
+    [self.queue addAssetToQueueIfNotProcessed:firstItem];
+    [self.queue addAssetToQueueIfNotProcessed:secondItem];
     
     XCTAssertTrue([self.queue moveAssetFromIndex:0 toIndex:0],
                    @"Expected -[moveAssetFromIndex:toIndex:] to return false.");
