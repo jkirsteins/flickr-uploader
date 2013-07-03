@@ -15,7 +15,8 @@
 
 -(void)addAssetToQueueIfNew:(ALAsset*)asset;
 -(void)shiftAssetFromQueue;
--(ALAsset*)peekAsset;
--(void)moveAssetFromIndex:(int)indexFrom toIndex:(int)indexTo;
+-(ALAsset*)firstAsset;
+-(BOOL)moveAssetFromIndex:(int)indexFrom toIndex:(int)indexTo;
+-(NSUInteger)count;
 
 @end

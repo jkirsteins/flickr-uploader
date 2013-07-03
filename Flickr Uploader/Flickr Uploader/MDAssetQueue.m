@@ -23,7 +23,7 @@
 {
     self = [super init];
     if (self) {
-        
+        self.orderedAssets = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -44,6 +44,11 @@
 #pragma mark -
 #pragma mark Public methods
 
+-(NSUInteger)count
+{
+    return [self.orderedAssets count];
+}
+
 -(void)addAssetToQueueIfNew:(ALAsset *)asset
 {
     if (![self isAssetNew:asset]) return;
@@ -52,20 +57,35 @@
 
 -(void)shiftAssetFromQueue
 {
+    if ([self.orderedAssets count] < 1)
+        return;
+    
     [self.orderedAssets removeObjectAtIndex:0];
 }
 
--(ALAsset*)peekAsset
+-(ALAsset*)firstAsset
 {
+    if (self.count < 1) return nil;
     return (ALAsset*)[self.orderedAssets objectAtIndex:0];
 }
 
--(void)moveAssetFromIndex:(int)indexFrom toIndex:(int)indexTo
+-(BOOL)moveAssetFromIndex:(int)indexFrom toIndex:(int)indexTo
 {
+    if (indexFrom < 0 || indexFrom >= [self.orderedAssets count])
+        return NO;
+    
+    if (indexTo < 0 || indexTo >= [self.orderedAssets count])
+        return NO;
+    
     ALAsset *item = [self.orderedAssets objectAtIndex:indexFrom];
     [self.orderedAssets removeObjectAtIndex:indexFrom];
-    [self.orderedAssets insertObject:item atIndex:indexTo];
+    
+    if (indexTo == self.orderedAssets.count)
+        [self.orderedAssets addObject:item];
+    else
+        [self.orderedAssets insertObject:item atIndex:indexTo];
 
+    return YES;
 }
 
 @end

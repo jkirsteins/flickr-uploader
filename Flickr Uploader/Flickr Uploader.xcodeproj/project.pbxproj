@@ -830,6 +830,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Andris Veinbergs (DQT397NW9C)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flickr Uploader/Flickr Uploader-Prefix.pch";
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "Flickr Uploader/Flickr Uploader-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -845,6 +846,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Andris Veinbergs (DQT397NW9C)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flickr Uploader/Flickr Uploader-Prefix.pch";
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "Flickr Uploader/Flickr Uploader-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
