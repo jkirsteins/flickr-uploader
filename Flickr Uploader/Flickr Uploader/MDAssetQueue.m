@@ -47,6 +47,10 @@
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"byteHashString = %@", [asset MD_createOrReturnHashedIdentifier]];
+    
+    NSLog(@"Hash: %@", [asset MD_createOrReturnHashedIdentifier]);
+    NSLog(@"Total entity count: %ul", [UploadLog MR_countOfEntities]);
+    
     uint count = [UploadLog MR_countOfEntitiesWithPredicate:predicate inContext:localContext];
     
     return count != 0;

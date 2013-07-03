@@ -34,8 +34,19 @@
 - (void)setUp
 {
     [super setUp];
-    self.queue = [[MDAssetQueue alloc] init];
+    
+    // Without the following line, the very first
+    // test seems to fail often (but not 100%), because
+    // an entity already (supposedly) exists in the in-memory store.
+    //
+    // Not sure what causes the bug. Leaving this here for time being.
+    //
+    // TODO: Get to the bottom of why this method is required
+    [MagicalRecord cleanUp];
+    
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
+    
+    self.queue = [[MDAssetQueue alloc] init];
 }
 
 - (void)tearDown
