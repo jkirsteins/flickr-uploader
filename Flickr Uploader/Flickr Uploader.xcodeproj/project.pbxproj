@@ -24,6 +24,7 @@
 		E249E414177C0EC700F55D7C /* MDCurrentlyProcessingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E249E413177C0EC700F55D7C /* MDCurrentlyProcessingCell.m */; };
 		E249E417177C13EE00F55D7C /* MDQueuedPictureCell4.m in Sources */ = {isa = PBXBuildFile; fileRef = E249E416177C13EE00F55D7C /* MDQueuedPictureCell4.m */; };
 		E24D2B26177CC73A00E4D58E /* MDUploadQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E24D2B25177CC73A00E4D58E /* MDUploadQueueViewController.m */; };
+		E26A84EB17855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = E26A84EA17855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.m */; };
 		E26C02BD17840AC500EB8300 /* MDAssetQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E26C02BC17840AC500EB8300 /* MDAssetQueueTests.m */; };
 		E26C035017840C9700EB8300 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E26C031817840C9700EB8300 /* MagicalImportFunctions.m */; };
 		E26C035217840C9700EB8300 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = E26C031A17840C9700EB8300 /* NSAttributeDescription+MagicalDataImport.m */; };
@@ -120,6 +121,8 @@
 		E24D2B24177CC73A00E4D58E /* MDUploadQueueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDUploadQueueViewController.h; path = ViewControllers/MDUploadQueueViewController.h; sourceTree = "<group>"; };
 		E24D2B25177CC73A00E4D58E /* MDUploadQueueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDUploadQueueViewController.m; path = ViewControllers/MDUploadQueueViewController.m; sourceTree = "<group>"; };
 		E25F80DA176EC22800328511 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		E26A84E917855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OCMockRecorder+ExtraMethods.h"; sourceTree = "<group>"; };
+		E26A84EA17855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OCMockRecorder+ExtraMethods.m"; sourceTree = "<group>"; };
 		E26C02BC17840AC500EB8300 /* MDAssetQueueTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAssetQueueTests.m; sourceTree = "<group>"; };
 		E26C031717840C9700EB8300 /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		E26C031817840C9700EB8300 /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
@@ -342,6 +345,8 @@
 				E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */,
 				E23B9CBD1767A9A10085E174 /* Supporting Files */,
 				E2E9BBBE1784BD7F00C9797B /* MDAssetImageCacheTests.m */,
+				E26A84E917855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.h */,
+				E26A84EA17855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.m */,
 			);
 			path = "Flickr UploaderTests";
 			sourceTree = "<group>";
@@ -738,6 +743,7 @@
 			files = (
 				E23B9CC31767A9A10085E174 /* Flickr_UploaderTests.m in Sources */,
 				E26C02BD17840AC500EB8300 /* MDAssetQueueTests.m in Sources */,
+				E26A84EB17855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.m in Sources */,
 				E2E9BBBF1784BD7F00C9797B /* MDAssetImageCacheTests.m in Sources */,
 				E23B15F61784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m in Sources */,
 			);
