@@ -18,10 +18,10 @@
     return [self andReturnValue:wrappedValue];
 }
 
-- (id) andReturnStruct:(void*)aValue objCType:(const char *)type{
+- (id) andReturnCGImageRef:(const void*)cgImageRefAddress {
     NSValue *wrappedValue = nil;
-    wrappedValue = [NSValue valueWithBytes:aValue
-                                  objCType:type];
+    wrappedValue = [NSValue valueWithBytes:cgImageRefAddress
+                                  objCType:@encode(CGImageRef)];
     
     return [self andReturnValue:wrappedValue];
 }

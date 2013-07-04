@@ -75,15 +75,15 @@
       Width of the thumbnail.
     @param height
       Height of the thumbnail.
-    @param queryMemoryCache
-      Whether to query the in-memory cache.
-    @param queryPersistentCache
-      Whether to query the persistent cache.
+    @param reqStateInMemoryCache
+      Required state for existance in the in-memory cache.
+    @param reqStateInPersistentStore
+      Required state for existance in the persistent store.
  */
 -(BOOL)thumbnailExistsForAsset:(ALAsset*)asset
                      withWidth:(NSUInteger)width
                      andHeight:(NSUInteger)height
-                      inMemory:(BOOL)queryMemoryCache
-            andPersistentCache:(BOOL)queryPersistentCache;
+                      inMemory:(BOOL)reqStateInMemoryCache
+            andPersistentCache:(BOOL)reqStateInPersistentStore;
 
 @end

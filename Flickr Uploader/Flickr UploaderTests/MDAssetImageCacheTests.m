@@ -10,6 +10,7 @@
 #import <OCMock/OCMock.h>
 #import "OCMockRecorder+ExtraMethods.h"
 #import "MDAssetImageCache.h"
+#import "ALAsset+MDAssetQueue.h"
 @import AssetsLibrary;
 
 #define MOCK_ASSET_WIDTH 128
@@ -78,10 +79,12 @@ static ALAsset *mockAssetWithImage;
     CGImageRef testImage = [MDAssetImageCacheTests generateTestImage];    
     id mockedAssetRepresentation = [OCMockObject mockForClass:[ALAssetRepresentation class]];
     
-    [[[mockedAssetRepresentation stub] andReturnStruct:testImage objCType:"CGImageRef"] fullResolutionImage];
+    [[[mockedAssetRepresentation stub] andReturnCGImageRef:&testImage] fullResolutionImage];
 
     id mockedAsset = [OCMockObject mockForClass:[ALAsset class]];
     [[[mockedAsset stub] andReturn:mockedAssetRepresentation] defaultRepresentation];
+    
+    [[[mockedAsset stub] andReturn:@"mockAsset1"] MD_createOrReturnHashedIdentifier];
     
     mockAssetWithImage = mockedAsset;
 }
@@ -201,13 +204,15 @@ static ALAsset *mockAssetWithImage;
                  @"Expected -[thumbnailForAsset:withWidth:andHeight:] to return nil, when given 0 size.");
 }
 
-- (void)testThumbnailForAssetWithWidthAndHeight_largerSizeThanOriginal_returnsNil
+- (void)testThumbnailForAssetWithWidthAndHeight_largerSizeThanOriginal_upscalesImage
 {
-    // TODO: decide if this method shouldn't return a scaled-up version?
-    XCTAssertNil([self.cache thumbnailForAsset:mockAssetWithImage
+    UIImage *t = [self.cache thumbnailForAsset:mockAssetWithImage
                                      withWidth:MOCK_ASSET_WIDTH*2
-                                     andHeight:MOCK_ASSET_HEIGHT*2],
-                 @"Expected -[thumbnailForAsset:withWidth:andHeight:] to return nil, when given larger size than the original.");
+                                     andHeight:MOCK_ASSET_HEIGHT*2];
+    NSLog(@"dimensions: %f %f", t.size.width, t.size.height);
+    XCTAssertNotNil(t, @"Expected -[thumbnailForAsset:withWidth:andHeight:] to return an UIImage* instance, when given larger size than the original.");
+    XCTAssertEquals((uint)t.size.width, (uint)MOCK_ASSET_WIDTH*2, @"Expected thumbnail width to be 2x the original.");
+    XCTAssertEquals((uint)t.size.height, (uint)MOCK_ASSET_HEIGHT*2, @"Expected thumbnail height to be 2x the original.");
 }
 
 - (void)testThumbnailForAssetWithWidthAndHeight_validAssetHalfSize_returnsCorrectSizeImage
@@ -216,8 +221,8 @@ static ALAsset *mockAssetWithImage;
                                        withWidth:MOCK_ASSET_WIDTH/2
                                        andHeight:MOCK_ASSET_HEIGHT/2];
     XCTAssertNotNil(img, @"Expected result to not be nil.");
-    XCTAssertEquals(img.size.width, MOCK_ASSET_WIDTH/2, @"Expected resulting image width to equal MOCK_ASSET_WIDTH/2");
-    XCTAssertEquals(img.size.height, MOCK_ASSET_HEIGHT/2, @"Expected resulting image height to equal MOCK_ASSET_HEIGHT/2");
+    XCTAssertEquals((uint)img.size.width, (uint)MOCK_ASSET_WIDTH/2, @"Expected resulting image width to equal MOCK_ASSET_WIDTH/2");
+    XCTAssertEquals((uint)img.size.height, (uint)MOCK_ASSET_HEIGHT/2, @"Expected resulting image height to equal MOCK_ASSET_HEIGHT/2");
 }
 
 #pragma mark -
@@ -237,7 +242,7 @@ static ALAsset *mockAssetWithImage;
                   @"Expected the asset thumbnail to be cached in both memory and the persistent store of the first cache instance.");
     
     MDAssetImageCache *cache2 = [[MDAssetImageCache alloc] init];
-    XCTAssertTrue([self.cache2 thumbnailExistsForAsset:mockAssetWithImage
+    XCTAssertTrue([cache2 thumbnailExistsForAsset:mockAssetWithImage
                                             withWidth:MOCK_ASSET_WIDTH
                                             andHeight:MOCK_ASSET_HEIGHT
                                              inMemory:NO

@@ -10,5 +10,5 @@
 
 @interface OCMockRecorder (ExtraMethods)
 - (id) andReturnBoolean:(BOOL)aValue;
-- (id) andReturnStruct:(void*)aValue objCType:(const char *)type;
+- (id) andReturnCGImageRef:(const void*)cgImageRefAddress;
 @end

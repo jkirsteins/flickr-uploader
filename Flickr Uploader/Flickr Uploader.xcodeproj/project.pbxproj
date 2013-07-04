@@ -12,6 +12,7 @@
 		E2069C12178596D800675485 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C11178596D800675485 /* CoreTelephony.framework */; };
 		E2069C14178596DE00675485 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C13178596DE00675485 /* SystemConfiguration.framework */; };
 		E2069C16178596E400675485 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C15178596E400675485 /* libz.dylib */; };
+		E221BCF81785B233007113B5 /* UIImage+Thumbnails.m in Sources */ = {isa = PBXBuildFile; fileRef = E221BCF71785B233007113B5 /* UIImage+Thumbnails.m */; };
 		E22A665917830644001224F7 /* MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A665817830644001224F7 /* MDAssetQueue.m */; };
 		E23B15F4178457B200888DEB /* ALAsset+MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */; };
 		E23B15F61784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */; };
@@ -106,6 +107,8 @@
 		E2069C11178596D800675485 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		E2069C13178596DE00675485 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E2069C15178596E400675485 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		E221BCF61785B233007113B5 /* UIImage+Thumbnails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Thumbnails.h"; sourceTree = "<group>"; };
+		E221BCF71785B233007113B5 /* UIImage+Thumbnails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Thumbnails.m"; sourceTree = "<group>"; };
 		E22A665717830644001224F7 /* MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAssetQueue.h; sourceTree = "<group>"; };
 		E22A665817830644001224F7 /* MDAssetQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAssetQueue.m; sourceTree = "<group>"; };
 		E23B15F2178457B200888DEB /* ALAsset+MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+MDAssetQueue.h"; sourceTree = "<group>"; };
@@ -341,6 +344,8 @@
 				E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */,
 				E2E9BBB81784B6BB00C9797B /* MDAssetImageCache.h */,
 				E2E9BBB91784B6BB00C9797B /* MDAssetImageCache.m */,
+				E221BCF61785B233007113B5 /* UIImage+Thumbnails.h */,
+				E221BCF71785B233007113B5 /* UIImage+Thumbnails.m */,
 			);
 			path = "Flickr Uploader";
 			sourceTree = "<group>";
@@ -723,6 +728,7 @@
 				E26C036C17840C9700EB8300 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				E2DAFE25176DFC0600A5C316 /* SBJsonStreamWriter.m in Sources */,
 				E2DAFE34176DFC1700A5C316 /* NSString+URLEncodeString.m in Sources */,
+				E221BCF81785B233007113B5 /* UIImage+Thumbnails.m in Sources */,
 				E2DAFE26176DFC0600A5C316 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				E26C035E17840C9700EB8300 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				E2DAFE29176DFC0600A5C316 /* SBJsonUTF8Stream.m in Sources */,
