@@ -225,27 +225,44 @@ static ALAsset *mockAssetWithImage;
 
 -(void)testThumbnailExistsForAssetWithWidthAndHeightInMemoryAndPersistentCache_sameAssetInTwoCacheInstances_returnsBothCachesInFirstInstanceAndOnlyPersistentInSecondInstance
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    [self.cache thumbnailForAsset:mockAssetWithImage
+                        withWidth:MOCK_ASSET_WIDTH
+                        andHeight:MOCK_ASSET_HEIGHT];
+    
+    XCTAssertTrue([self.cache thumbnailExistsForAsset:mockAssetWithImage
+                                            withWidth:MOCK_ASSET_WIDTH
+                                            andHeight:MOCK_ASSET_HEIGHT
+                                             inMemory:YES
+                                   andPersistentCache:YES],
+                  @"Expected the asset thumbnail to be cached in both memory and the persistent store of the first cache instance.");
+    
+    MDAssetImageCache *cache2 = [[MDAssetImageCache alloc] init];
+    XCTAssertTrue([self.cache2 thumbnailExistsForAsset:mockAssetWithImage
+                                            withWidth:MOCK_ASSET_WIDTH
+                                            andHeight:MOCK_ASSET_HEIGHT
+                                             inMemory:NO
+                                   andPersistentCache:YES],
+                  @"Expected the asset thumbnail to be cached in only the persistent store of the second cache instance.");
 }
 
 -(void)testThumbnailExistsForAssetWithWidthAndHeightInMemoryAndPersistentCache_nilAsset_returnsNO
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    XCTAssertFalse([self.cache thumbnailExistsForAsset:nil
+                                            withWidth:MOCK_ASSET_WIDTH
+                                            andHeight:MOCK_ASSET_HEIGHT
+                                             inMemory:YES
+                                   andPersistentCache:YES],
+                  @"Expected the function to return NO when given nil asset.");
 }
 
 -(void)testThumbnailExistsForAssetWithWidthAndHeightInMemoryAndPersistentCache_uninsertedAsset_returnsNO
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
-}
-
--(void)testThumbnailExistsForAssetWithWidthAndHeightInMemoryAndPersistentCache_newAssetInBothCaches_returnsYES
-{
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
-}
-
--(void)testThumbnailExistsForAssetWithWidthAndHeightInMemoryAndPersistentCache_newAssetInPersistentCacheOnlyAfterClearMemoryCache_returnsYES
-{
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    XCTAssertFalse([self.cache thumbnailExistsForAsset:mockAssetWithImage
+                                             withWidth:MOCK_ASSET_WIDTH
+                                             andHeight:MOCK_ASSET_HEIGHT
+                                              inMemory:YES
+                                    andPersistentCache:YES],
+                   @"Expected the function to return NO when given uncached asset.");
 }
 
 @end

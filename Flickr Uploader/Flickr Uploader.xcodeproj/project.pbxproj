@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E2069C0E178571B300675485 /* CachedThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = E2069C0D178571B300675485 /* CachedThumbnail.m */; };
+		E2069C10178596B000675485 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C0F178596B000675485 /* NewRelicAgent.framework */; };
+		E2069C12178596D800675485 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C11178596D800675485 /* CoreTelephony.framework */; };
+		E2069C14178596DE00675485 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C13178596DE00675485 /* SystemConfiguration.framework */; };
+		E2069C16178596E400675485 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C15178596E400675485 /* libz.dylib */; };
 		E22A665917830644001224F7 /* MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A665817830644001224F7 /* MDAssetQueue.m */; };
 		E23B15F4178457B200888DEB /* ALAsset+MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */; };
 		E23B15F61784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */; };
@@ -95,6 +100,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E2069C0C178571B300675485 /* CachedThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CachedThumbnail.h; path = Model/CachedThumbnail.h; sourceTree = "<group>"; };
+		E2069C0D178571B300675485 /* CachedThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CachedThumbnail.m; path = Model/CachedThumbnail.m; sourceTree = "<group>"; };
+		E2069C0F178596B000675485 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
+		E2069C11178596D800675485 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		E2069C13178596DE00675485 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E2069C15178596E400675485 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		E22A665717830644001224F7 /* MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAssetQueue.h; sourceTree = "<group>"; };
 		E22A665817830644001224F7 /* MDAssetQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAssetQueue.m; sourceTree = "<group>"; };
 		E23B15F2178457B200888DEB /* ALAsset+MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+MDAssetQueue.h"; sourceTree = "<group>"; };
@@ -241,9 +252,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2069C16178596E400675485 /* libz.dylib in Frameworks */,
+				E2069C14178596DE00675485 /* SystemConfiguration.framework in Frameworks */,
+				E2069C12178596D800675485 /* CoreTelephony.framework in Frameworks */,
 				E23B9C9A1767A9A10085E174 /* CoreGraphics.framework in Frameworks */,
 				E23B9C9C1767A9A10085E174 /* UIKit.framework in Frameworks */,
 				E23B9C981767A9A10085E174 /* Foundation.framework in Frameworks */,
+				E2069C10178596B000675485 /* NewRelicAgent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +300,10 @@
 		E23B9C961767A9A10085E174 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2069C15178596E400675485 /* libz.dylib */,
+				E2069C13178596DE00675485 /* SystemConfiguration.framework */,
+				E2069C11178596D800675485 /* CoreTelephony.framework */,
+				E2069C0F178596B000675485 /* NewRelicAgent.framework */,
 				E26C038417840F9800EB8300 /* CoreData.framework */,
 				E2F2C441177F793600528D02 /* libOCMock.a */,
 				E25F80DA176EC22800328511 /* AssetsLibrary.framework */,
@@ -496,6 +515,8 @@
 			isa = PBXGroup;
 			children = (
 				E278217E177A267C0064278F /* Model.xcdatamodeld */,
+				E2069C0C178571B300675485 /* CachedThumbnail.h */,
+				E2069C0D178571B300675485 /* CachedThumbnail.m */,
 				E278217A177A25C80064278F /* UploadLog.h */,
 				E278217B177A25C80064278F /* UploadLog.m */,
 			);
@@ -716,6 +737,7 @@
 				E26C036617840C9700EB8300 /* NSManagedObject+MagicalRequests.m in Sources */,
 				E2DAFE41176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m in Sources */,
 				E278217C177A25C80064278F /* UploadLog.m in Sources */,
+				E2069C0E178571B300675485 /* CachedThumbnail.m in Sources */,
 				E2DAFE35176DFC1700A5C316 /* RXFlickr.m in Sources */,
 				E26C038217840C9700EB8300 /* MagicalRecord.m in Sources */,
 				E26C036817840C9700EB8300 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
@@ -854,6 +876,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Andris Veinbergs (DQT397NW9C)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flickr Uploader/Flickr Uploader-Prefix.pch";
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
@@ -870,6 +896,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Andris Veinbergs (DQT397NW9C)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flickr Uploader/Flickr Uploader-Prefix.pch";
 				GCC_WARN_UNDECLARED_SELECTOR = NO;

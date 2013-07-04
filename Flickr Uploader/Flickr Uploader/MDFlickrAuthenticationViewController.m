@@ -46,7 +46,7 @@ static NSString* kCallbackURL = @"md://flickr/callback";
 - (void)flickrDidVerifyToken:(RXFlickr *)flickr
 {
     self.spinner.hidden = YES;
-    [self performSegueWithIdentifier:@"authToMainSegue" sender:self];
+    [self performSegueWithIdentifier:@"authToUploadQueueSegue" sender:self];
 }
 
 - (void)flickrDidNotVerifyToken:(RXFlickr *)flickr

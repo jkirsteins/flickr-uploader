@@ -7,12 +7,14 @@
 //
 
 #import "MDAppDelegate.h"
+#import <NewRelicAgent/NewRelicAgent.h>
 
 @implementation MDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [MagicalRecord setupCoreDataStack];
+    [NewRelicAgent startWithApplicationToken:@"AAebf75121db263155894f88ebbb5430fe8a629d08"];
     return YES;
 }
 							

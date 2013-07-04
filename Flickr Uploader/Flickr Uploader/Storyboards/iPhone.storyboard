@@ -40,7 +40,7 @@
                     <connections>
                         <outlet property="authenticateButton" destination="6VU-27-y5Y" id="zRi-ZO-fQH"/>
                         <outlet property="spinner" destination="9AU-tX-QI6" id="rqi-fP-oWR"/>
-                        <segue destination="cDx-d2-uwj" kind="push" identifier="authToMainSegue" id="PIv-lg-ZIE"/>
+                        <segue destination="cDx-d2-uwj" kind="push" identifier="authToUploadQueueSegue" id="rFP-jR-GlG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14I-ec-zjY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -120,7 +120,7 @@
             </objects>
             <point key="canvasLocation" x="1109" y="-535"/>
         </scene>
-        <!--Upload Queue View Controller-->
+        <!--Upload Queue View Controller - Upload Queue-->
         <scene sceneID="d7z-TJ-zPc">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="cDx-d2-uwj" customClass="MDUploadQueueViewController" sceneMemberID="viewController">
@@ -155,10 +155,12 @@
                         </connections>
                     </collectionView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="dEi-kt-n3d"/>
+                    <navigationItem key="navigationItem" title="Upload Queue" id="dEi-kt-n3d">
+                        <barButtonItem key="backBarButtonItem" title="asd" id="siq-vm-UFX"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="zPL-qd-Msx" id="IaG-GM-E5R"/>
-                        <outlet property="photoDataSource" destination="icd-73-7O8" id="3qE-hG-CTk"/>
+                        <outlet property="uploadQueue" destination="icd-73-7O8" id="x1p-Dt-HFr"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dh3-Yj-Fw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -192,6 +194,9 @@
         <class className="LXReorderableCollectionViewFlowLayout" superclassName="UICollectionViewFlowLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LXReorderableCollectionViewFlowLayout.h"/>
         </class>
+        <class className="MDAssetQueue" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDAssetQueue.h"/>
+        </class>
         <class className="MDCurrentlyProcessingCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MDCurrentlyProcessingCell.h"/>
             <relationships>
@@ -211,14 +216,11 @@
                 <relationship kind="outletCollection" name="thumbnails" candidateClass="UIImageView"/>
             </relationships>
         </class>
-        <class className="MDUploadQueue" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDUploadQueue.h"/>
-        </class>
         <class className="MDUploadQueueViewController" superclassName="UICollectionViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MDUploadQueueViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="photoDataSource" candidateClass="MDUploadQueue"/>
+                <relationship kind="outlet" name="uploadQueue" candidateClass="MDAssetQueue"/>
             </relationships>
         </class>
         <class className="MDUploadViewController" superclassName="UITableViewController">
