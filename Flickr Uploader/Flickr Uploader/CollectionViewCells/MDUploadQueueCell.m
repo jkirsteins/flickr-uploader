@@ -57,8 +57,14 @@ static dispatch_queue_t _backgroundQueue = nil;
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 if (reqGeneration == self.generation)
                 {
+                    // TODO: make sure UIImageView automatically expands to fill
+                    CGRect f = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+                    self.imageView.frame = f;
+                    self.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+                    
+                    //[self.imageView setBackgroundColor:[UIColor greenColor]];
                     self.imageView.image = img;
-                    [self.imageView setBackgroundColor:[UIColor greenColor]];
+                    
                 }
                 else
                 {

@@ -123,11 +123,10 @@ static int x = 0;
     else
         asset = [self.uploadQueue assetWithIndexOrNil:((uint)indexPath.row)+1];
     
-    cell.backgroundColor = [UIColor redColor];
+    cell.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
     [cell setAssetAsync:asset withCache:self.thumbnailCache forGeneration:cell.generation];
     
-    // TODO: make sure UIImageView automatically expands to fill
-    [cell.imageView setBounds:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)];
+    
 
     return cell;
 }
