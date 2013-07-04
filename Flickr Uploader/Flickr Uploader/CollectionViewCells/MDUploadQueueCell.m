@@ -47,7 +47,6 @@ static dispatch_queue_t _backgroundQueue = nil;
         @autoreleasepool {
             if (reqGeneration != self.generation)
             {
-                NSLog(@"Generation mismatch. Fast drop");
                 return;
             }
             

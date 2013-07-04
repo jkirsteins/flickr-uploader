@@ -9,11 +9,15 @@
 #import "MDAssetQueue.h"
 #import "ALAsset+MDAssetQueue.h"
 #import "UploadLog.h"
+@import Dispatch;
+
+static dispatch_queue_t _backgroundQueue = nil;
 
 @interface MDAssetQueue()
 
 @property (strong,nonatomic) NSMutableArray *orderedAssets;
 
++(dispatch_queue_t)backgroundQueue;
 -(BOOL)hasAssetBeenProcessed:(ALAsset*)asset;
 -(void)markAssetProcessed:(ALAsset*)asset;
 -(void)addAssetToQueue:(ALAsset*)asset;
@@ -33,6 +37,15 @@
 
 #pragma mark -
 #pragma mark Internal instance methods
+
++(dispatch_queue_t)backgroundQueue
+{
+    if (_backgroundQueue == nil)
+    {
+        _backgroundQueue = dispatch_queue_create("lv.openid.test.asset-preparation-queue", NULL);
+    }
+    return _backgroundQueue;
+}
 
 -(void)markAssetProcessed:(ALAsset *)asset
 {
@@ -66,10 +79,18 @@
     return [self.orderedAssets count];
 }
 
--(void)addAssetToQueueIfNotProcessed:(ALAsset *)asset
+-(void)addAssetToQueueIfNotProcessedAsync:(ALAsset *)asset withCallback:(void (^)())callback
 {
-    if ([self hasAssetBeenProcessed:asset]) return;
-    [self addAssetToQueue:asset];
+    dispatch_async([MDAssetQueue backgroundQueue], ^(void) {
+        if ([self hasAssetBeenProcessed:asset]) return;
+        [self addAssetToQueue:asset];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (callback)
+            {
+                callback();
+            }
+        });
+    });
 }
 
 -(void)shiftAssetAndMarkProcessed

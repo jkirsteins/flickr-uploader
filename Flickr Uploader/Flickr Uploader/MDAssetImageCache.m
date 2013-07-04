@@ -91,23 +91,25 @@
                                    withWidth:(NSUInteger)w
                                    andHeight:(NSUInteger)h
 {
-    if (w * h == 0) return nil;
-    
-    UIImage *img = [[UIImage alloc] initWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
-    img = [img imageByScalingAndCroppingForSize:CGSizeMake(w, h)];
-    
-    self.assetThumbnailMap[[asset MD_createOrReturnHashedIdentifier]] = img;
+    @autoreleasepool {
+        if (w * h == 0) return nil;
+        
+        UIImage *img = [[UIImage alloc] initWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+        img = [img imageByScalingAndCroppingForSize:CGSizeMake(w, h)];
+        
+        self.assetThumbnailMap[[asset MD_createOrReturnHashedIdentifier]] = img;
 
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
-    CachedThumbnail *ct = [CachedThumbnail MR_createInContext:localContext];
-    
-    ct.assetByteHashString = [asset MD_createOrReturnHashedIdentifier];
-    ct.thumbnailWidth = [[NSNumber alloc] initWithUnsignedInteger:w];
-    ct.thumbnailHeight = [[NSNumber alloc] initWithUnsignedInteger:w];
-    ct.thumbnailBytes = UIImagePNGRepresentation(img);
-    [localContext MR_saveToPersistentStoreAndWait];
-    
-    return img;
+        NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
+        CachedThumbnail *ct = [CachedThumbnail MR_createInContext:localContext];
+        
+        ct.assetByteHashString = [asset MD_createOrReturnHashedIdentifier];
+        ct.thumbnailWidth = [[NSNumber alloc] initWithUnsignedInteger:w];
+        ct.thumbnailHeight = [[NSNumber alloc] initWithUnsignedInteger:w];
+        ct.thumbnailBytes = UIImagePNGRepresentation(img);
+        [localContext MR_saveToPersistentStoreAndWait];
+        
+        return img;
+    }
 }
 
 -(NSString*)thumbnailKeyForAsset:(ALAsset *)asset withWidth :(NSUInteger)w andHeight:(NSUInteger)h

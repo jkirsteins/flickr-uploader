@@ -13,7 +13,7 @@
 
 @interface MDAssetQueue : NSObject
 
--(void)addAssetToQueueIfNotProcessed:(ALAsset*)asset;
+-(void)addAssetToQueueIfNotProcessedAsync:(ALAsset*)asset withCallback:(void (^)())callback;
 -(void)shiftAssetAndMarkProcessed;
 -(ALAsset*)assetWithIndexOrNil:(NSUInteger)ix;
 -(BOOL)moveAssetFromIndex:(NSUInteger)indexFrom toIndex:(NSUInteger)indexTo;

@@ -42,13 +42,34 @@
     [self.thumbnailCache clearMemoryCache];
 }
 
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    NSArray *visibleCells = [self.collectionView visibleCells];
+    [visibleCells enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MDUploadQueueCell *cell = (MDUploadQueueCell *)obj;
+        
+        NSIndexPath *indexPath = [(UICollectionView*)scrollView indexPathForCell:cell];
+        ALAsset *asset = [self.uploadQueue assetWithIndexOrNil:indexPath.section+indexPath.row];
+        
+        NSLog(@"didEndDecelerating: setting asset for IP %d.%d, G: %d", indexPath.section, indexPath.row, cell.generation);
+        [cell setAssetAsync:asset withCache:self.thumbnailCache forGeneration:cell.generation];
+    }];
+}
+
 #pragma mark -
 #pragma mark Asset access
-static int x = 0;
+static int sup = 0;
 -(void)addPhoto:(ALAsset *)asset
 {
-    if (++x > 6) return;
-    [self.uploadQueue addAssetToQueueIfNotProcessed:asset];
+    UICollectionView *view = self.collectionView;
+    sup++;
+    [self.uploadQueue addAssetToQueueIfNotProcessedAsync:asset withCallback:^() {
+        sup--;
+        if (sup % 5 == 0)
+        {
+            [view reloadData];
+        }
+    }];
 }
 
 -(void)loadPhotos
@@ -72,6 +93,7 @@ static int x = 0;
                   }
                   else
                   {
+                      NSLog(@"Loaded all assets. Done");
                       [self.collectionView reloadData];
                   }
               }];
@@ -105,7 +127,7 @@ static int x = 0;
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
     if (section == 0) return [self.uploadQueue count] > 0 ? 1 : 0;
-    return 5;
+
     return MAX(0, [self.uploadQueue count]-1);
 }
 
@@ -117,14 +139,33 @@ static int x = 0;
     MDUploadQueueCell *cell = (MDUploadQueueCell*)[cv dequeueReusableCellWithReuseIdentifier:@"small" forIndexPath:indexPath];
     cell.generation+=1;
     
-    ALAsset *asset = nil;
-    if (indexPath.section == 0)
-        asset = [self.uploadQueue assetWithIndexOrNil:0];
-    else
-        asset = [self.uploadQueue assetWithIndexOrNil:((uint)indexPath.row)+1];
-    
+    cell.imageView.image = nil;
     cell.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
-    [cell setAssetAsync:asset withCache:self.thumbnailCache forGeneration:cell.generation];
+
+    ALAsset *asset = nil;
+    asset = [self.uploadQueue assetWithIndexOrNil:indexPath.section+indexPath.row];
+    
+    if (!cv.decelerating)
+    {
+        [cell setAssetAsync:asset withCache:self.thumbnailCache forGeneration:cell.generation];
+    }
+    else
+    {
+        UIImage *img = [self.thumbnailCache thumbnailForAsset:asset
+                                      withWidth:cell.bounds.size.width
+                                      andHeight:cell.bounds.size.height];
+        if (img != nil)
+        {
+            // TODO hacky
+            cell.imageView.image = img;
+            CGRect f = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
+            cell.imageView.frame = f;
+            cell.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        }
+    }
+    
+    //NSLog(@"Setting asset for a tile \\w indexPath: s: %d r: %d g: %d.", indexPath.section, indexPath.row, cell.generation);
+    //[cell setAssetAsync:asset withCache:self.thumbnailCache forGeneration:cell.generation];
     
     
 
