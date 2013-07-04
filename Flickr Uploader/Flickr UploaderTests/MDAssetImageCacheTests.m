@@ -7,10 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "MDAssetImageCache.h"
 @import AssetsLibrary;
 
 @interface MDAssetImageCacheTests : XCTestCase
-
+@property (strong,nonatomic) MDAssetImageCache *cache;
 @end
 
 @implementation MDAssetImageCacheTests
@@ -22,10 +23,14 @@
 {
     [MagicalRecord cleanUp];
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
+    
+    self.cache = [[MDAssetImageCache alloc] init];
 }
 
 - (void)tearDown
 {
+    self.cache = nil;
+    
     [MagicalRecord cleanUp];
 }
 
@@ -34,7 +39,9 @@
 
 - (void)testPurgeThumbnailsForAsset_nonCachedAsset_doesNothing
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    ALAsset *asset = [[ALAsset alloc] init];
+    XCTAssertNoThrow([self.cache purgeThumbnailsForAsset:asset],
+                     @"Expected -[purgeThumbnailsForAsset] to not throw an exception when given an un-cached asset.");
 }
 
 - (void)testPurgeThumbnailsForAsset_fullyCachedAsset_removesFromMemoryAndPersistentCache
@@ -93,8 +100,18 @@
     XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
 
+- (void)testThumbnailForAssetWithWidthAndHeight_validAssetHalfSize_returnsCorrectSizeImage
+{
+    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+}
+
 #pragma mark -
 #pragma mark thumbnailExistsForAsset:withWidth:andHeight:inMemory:andPersistentCache:
+
+-(void)testThumbnailExistsForAssetWithWidthAndHeightInMemoryAndPersistentCache_sameAssetInTwoCacheInstances_returnsBothCachesInFirstInstanceAndOnlyPersistentInSecondInstance
+{
+    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+}
 
 -(void)testThumbnailExistsForAssetWithWidthAndHeightInMemoryAndPersistentCache_nilAsset_returnsNO
 {
