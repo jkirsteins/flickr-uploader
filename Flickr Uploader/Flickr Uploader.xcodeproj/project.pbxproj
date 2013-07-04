@@ -13,6 +13,7 @@
 		E2069C14178596DE00675485 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C13178596DE00675485 /* SystemConfiguration.framework */; };
 		E2069C16178596E400675485 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C15178596E400675485 /* libz.dylib */; };
 		E221BCF81785B233007113B5 /* UIImage+Thumbnails.m in Sources */ = {isa = PBXBuildFile; fileRef = E221BCF71785B233007113B5 /* UIImage+Thumbnails.m */; };
+		E221BCFB1785C1FC007113B5 /* MDUploadQueueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E221BCFA1785C1FC007113B5 /* MDUploadQueueCell.m */; };
 		E22A665917830644001224F7 /* MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A665817830644001224F7 /* MDAssetQueue.m */; };
 		E23B15F4178457B200888DEB /* ALAsset+MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */; };
 		E23B15F61784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */; };
@@ -109,6 +110,8 @@
 		E2069C15178596E400675485 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		E221BCF61785B233007113B5 /* UIImage+Thumbnails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Thumbnails.h"; sourceTree = "<group>"; };
 		E221BCF71785B233007113B5 /* UIImage+Thumbnails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Thumbnails.m"; sourceTree = "<group>"; };
+		E221BCF91785C1FC007113B5 /* MDUploadQueueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDUploadQueueCell.h; path = CollectionViewCells/MDUploadQueueCell.h; sourceTree = "<group>"; };
+		E221BCFA1785C1FC007113B5 /* MDUploadQueueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDUploadQueueCell.m; path = CollectionViewCells/MDUploadQueueCell.m; sourceTree = "<group>"; };
 		E22A665717830644001224F7 /* MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAssetQueue.h; sourceTree = "<group>"; };
 		E22A665817830644001224F7 /* MDAssetQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAssetQueue.m; sourceTree = "<group>"; };
 		E23B15F2178457B200888DEB /* ALAsset+MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+MDAssetQueue.h"; sourceTree = "<group>"; };
@@ -280,6 +283,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E221BCFC1785C201007113B5 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				E221BCF91785C1FC007113B5 /* MDUploadQueueCell.h */,
+				E221BCFA1785C1FC007113B5 /* MDUploadQueueCell.m */,
+			);
+			name = CollectionViewCells;
+			sourceTree = "<group>";
+		};
 		E23B9C8B1767A9A10085E174 = {
 			isa = PBXGroup;
 			children = (
@@ -322,7 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				E29EAE7C177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout */,
-				E24D2B27177CC75400E4D58E /* CollectionViewCells */,
+				E221BCFC1785C201007113B5 /* CollectionViewCells */,
 				E249E411177C0E9700F55D7C /* TableViewCells */,
 				E25F80D6176EC16B00328511 /* ViewControllers */,
 				E2DAFE37176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.h */,
@@ -393,13 +405,6 @@
 				E249E416177C13EE00F55D7C /* MDQueuedPictureCell4.m */,
 			);
 			name = TableViewCells;
-			sourceTree = "<group>";
-		};
-		E24D2B27177CC75400E4D58E /* CollectionViewCells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = CollectionViewCells;
 			sourceTree = "<group>";
 		};
 		E25F80D6176EC16B00328511 /* ViewControllers */ = {
@@ -711,6 +716,7 @@
 				E2DAFE1F176DFC0600A5C316 /* NSObject+SBJson.m in Sources */,
 				E26C035017840C9700EB8300 /* MagicalImportFunctions.m in Sources */,
 				E2DAFE05176DFBF500A5C316 /* NSString+MD5.m in Sources */,
+				E221BCFB1785C1FC007113B5 /* MDUploadQueueCell.m in Sources */,
 				E26C036217840C9700EB8300 /* NSManagedObject+MagicalFinders.m in Sources */,
 				E2DAFE36176DFC1700A5C316 /* RXFlickr+checkToken.m in Sources */,
 				E23B15F4178457B200888DEB /* ALAsset+MDAssetQueue.m in Sources */,

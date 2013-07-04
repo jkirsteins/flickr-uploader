@@ -63,7 +63,7 @@
 {
     ALAsset *asset = [[ALAsset alloc] init];
     [self.queue addAssetToQueueIfNotProcessed:asset];
-    XCTAssertEqualObjects([self.queue firstAsset], asset,
+    XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], asset,
                   @"Expected -[firstAsset] to return added asset.");
 }
 
@@ -75,7 +75,7 @@
     [self.queue addAssetToQueueIfNotProcessed:firstAsset];
     [self.queue addAssetToQueueIfNotProcessed:secondAsset];
     
-    XCTAssertTrue([self.queue firstAsset] == firstAsset,
+    XCTAssertTrue([self.queue assetWithIndexOrNil:0] == firstAsset,
                   @"Expected -[firstAsset] to return the first asset.");
 }
 
@@ -136,14 +136,21 @@
 }
 
 #pragma mark -
-#pragma mark firstAsset
+#pragma mark assetWithIndexOrNil
 
--(void)testFirstAsset_callOnEmptyQueue_returnsNil
+-(void)testAssetWithIndexOrNil_callOnEmptyQueue_returnsNil
 {
-    XCTAssertNil([self.queue firstAsset], @"Expected -[firstAsset] to return nil on an empty queue.");
+    XCTAssertNil([self.queue assetWithIndexOrNil:0], @"Expected -[firstAsset] to return nil on an empty queue.");
 }
 
--(void)testFirstAsset_callOnQueueWithTwoItems_returnsFirstItem
+-(void)testAssetWithIndexOrNil_callWithTooGreatIndex_returnsNil
+{
+    ALAsset *asset =[[ALAsset alloc] init];
+    [self.queue addAssetToQueueIfNotProcessed:asset];
+    XCTAssertNil([self.queue assetWithIndexOrNil:1], @"Expected -[firstAsset] to return nil when index is too high.");
+}
+
+-(void)testAssetWithIndexOrNil_callIndex1When2Assets_returnsSecondAsset
 {
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
@@ -151,8 +158,9 @@
     [self.queue addAssetToQueueIfNotProcessed:firstItem];
     [self.queue addAssetToQueueIfNotProcessed:secondItem];
     
-    XCTAssertEqualObjects([self.queue firstAsset], firstItem,
-                          @"Expected -[firstAsset] to return firstItem.");
+    XCTAssertEqualObjects([self.queue assetWithIndexOrNil:1], secondItem,
+                          @"Expected -[assetWithIndexOrNil] to return secondItem.");
+    
 }
 
 #pragma mark -
@@ -169,7 +177,7 @@
     XCTAssertTrue([self.queue moveAssetFromIndex:0 toIndex:1],
                   @"Expected -[moveAssetFromIndex:toIndex:] to return true.");
     
-    XCTAssertEqualObjects([self.queue firstAsset], secondItem, @"Expected -[firstAsset] to return secondItem.");
+    XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], secondItem, @"Expected -[firstAsset] to return secondItem.");
 }
 
 -(void)testMoveAssetFromIndex_moveFrom1To0InTwoItemQueue_swapsItemsReturnsYES
@@ -183,7 +191,7 @@
     XCTAssertTrue([self.queue moveAssetFromIndex:1 toIndex:0],
                   @"Expected -[moveAssetFromIndex:toIndex:] to return true.");
     
-    XCTAssertEqualObjects([self.queue firstAsset], secondItem, @"Expected -[firstAsset] to return secondItem.");
+    XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], secondItem, @"Expected -[firstAsset] to return secondItem.");
 }
 
 -(void)testMoveAssetFromIndex_moveFrom0To2InTwoItemQueue_returnsNO
@@ -197,7 +205,7 @@
     XCTAssertFalse([self.queue moveAssetFromIndex:0 toIndex:2],
                   @"Expected -[moveAssetFromIndex:toIndex:] to return false.");
     
-    XCTAssertEqualObjects([self.queue firstAsset], firstItem, @"Expected -[firstAsset] to return firstItem.");
+    XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], firstItem, @"Expected -[firstAsset] to return firstItem.");
 }
 
 -(void)testMoveAssetFromIndex_moveFrom2To0InTwoItemQueue_returnsNO
@@ -211,7 +219,7 @@
     XCTAssertFalse([self.queue moveAssetFromIndex:2 toIndex:0],
                    @"Expected -[moveAssetFromIndex:toIndex:] to return false.");
     
-    XCTAssertEqualObjects([self.queue firstAsset], firstItem, @"Expected -[firstAsset] to return firstItem.");
+    XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], firstItem, @"Expected -[firstAsset] to return firstItem.");
 }
 
 -(void)testMoveAssetFromIndex_moveFrom0To0InTwoItemQueue_doesNothingReturnsYES
@@ -225,7 +233,7 @@
     XCTAssertTrue([self.queue moveAssetFromIndex:0 toIndex:0],
                    @"Expected -[moveAssetFromIndex:toIndex:] to return false.");
     
-    XCTAssertEqualObjects([self.queue firstAsset], firstItem, @"Expected -[firstAsset] to return firstItem.");
+    XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], firstItem, @"Expected -[firstAsset] to return firstItem.");
 }
 
 

@@ -48,9 +48,6 @@
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"byteHashString = %@", [asset MD_createOrReturnHashedIdentifier]];
     
-    NSLog(@"Hash: %@", [asset MD_createOrReturnHashedIdentifier]);
-    NSLog(@"Total entity count: %ul", [UploadLog MR_countOfEntities]);
-    
     uint count = [UploadLog MR_countOfEntitiesWithPredicate:predicate inContext:localContext];
     
     return count != 0;
@@ -85,18 +82,19 @@
     [self.orderedAssets removeObjectAtIndex:0];
 }
 
--(ALAsset*)firstAsset
+-(ALAsset*)assetWithIndexOrNil:(NSUInteger)ix
 {
     if (self.orderedAssets.count < 1) return nil;
-    return (ALAsset*)[self.orderedAssets objectAtIndex:0];
+    if (ix >= self.orderedAssets.count) return nil;
+    return (ALAsset*)[self.orderedAssets objectAtIndex:ix];
 }
 
--(BOOL)moveAssetFromIndex:(int)indexFrom toIndex:(int)indexTo
+-(BOOL)moveAssetFromIndex:(NSUInteger)indexFrom toIndex:(NSUInteger)indexTo
 {
-    if (indexFrom < 0 || indexFrom >= [self.orderedAssets count])
+    if (indexFrom >= [self.orderedAssets count])
         return NO;
     
-    if (indexTo < 0 || indexTo >= [self.orderedAssets count])
+    if (indexTo >= [self.orderedAssets count])
         return NO;
     
     ALAsset *item = [self.orderedAssets objectAtIndex:indexFrom];

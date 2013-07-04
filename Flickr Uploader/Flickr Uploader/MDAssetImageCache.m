@@ -93,9 +93,6 @@
 {
     if (w * h == 0) return nil;
     
-    ALAssetRepresentation *def = [asset defaultRepresentation];
-    CGImageRef ref = [def fullResolutionImage];
-    
     UIImage *img = [[UIImage alloc] initWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
     img = [img imageByScalingAndCroppingForSize:CGSizeMake(w, h)];
     

@@ -130,24 +130,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="Tw4-dT-8eg" customClass="LXReorderableCollectionViewFlowLayout"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="large" id="dEG-nG-bRt">
-                                <rect key="frame" x="0.0" y="14" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="small" id="IwA-pP-bZ5">
-                                <rect key="frame" x="60" y="0.0" width="79" height="79"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="small" reuseIdentifier="small" id="IwA-pP-bZ5" customClass="MDUploadQueueCell">
+                                <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YG7-lA-EmE">
+                                            <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <size key="customSize" width="79" height="79"/>
+                                <connections>
+                                    <outlet property="imageView" destination="YG7-lA-EmE" id="jbH-wj-UHC"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -160,11 +160,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="zPL-qd-Msx" id="IaG-GM-E5R"/>
+                        <outlet property="thumbnailCache" destination="6zl-N1-gkX" id="F2s-3M-DjP"/>
                         <outlet property="uploadQueue" destination="icd-73-7O8" id="x1p-Dt-HFr"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dh3-Yj-Fw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="icd-73-7O8" customClass="MDAssetQueue"/>
+                <customObject id="6zl-N1-gkX" customClass="MDAssetImageCache"/>
             </objects>
             <point key="canvasLocation" x="1614" y="-47"/>
         </scene>
@@ -194,6 +196,9 @@
         <class className="LXReorderableCollectionViewFlowLayout" superclassName="UICollectionViewFlowLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LXReorderableCollectionViewFlowLayout.h"/>
         </class>
+        <class className="MDAssetImageCache" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDAssetImageCache.h"/>
+        </class>
         <class className="MDAssetQueue" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MDAssetQueue.h"/>
         </class>
@@ -216,10 +221,17 @@
                 <relationship kind="outletCollection" name="thumbnails" candidateClass="UIImageView"/>
             </relationships>
         </class>
+        <class className="MDUploadQueueCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDUploadQueueCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
         <class className="MDUploadQueueViewController" superclassName="UICollectionViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MDUploadQueueViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="thumbnailCache" candidateClass="MDAssetImageCache"/>
                 <relationship kind="outlet" name="uploadQueue" candidateClass="MDAssetQueue"/>
             </relationships>
         </class>
@@ -237,6 +249,9 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

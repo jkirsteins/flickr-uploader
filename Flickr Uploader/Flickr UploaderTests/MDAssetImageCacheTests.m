@@ -209,7 +209,7 @@ static ALAsset *mockAssetWithImage;
     UIImage *t = [self.cache thumbnailForAsset:mockAssetWithImage
                                      withWidth:MOCK_ASSET_WIDTH*2
                                      andHeight:MOCK_ASSET_HEIGHT*2];
-    NSLog(@"dimensions: %f %f", t.size.width, t.size.height);
+    
     XCTAssertNotNil(t, @"Expected -[thumbnailForAsset:withWidth:andHeight:] to return an UIImage* instance, when given larger size than the original.");
     XCTAssertEquals((uint)t.size.width, (uint)MOCK_ASSET_WIDTH*2, @"Expected thumbnail width to be 2x the original.");
     XCTAssertEquals((uint)t.size.height, (uint)MOCK_ASSET_HEIGHT*2, @"Expected thumbnail height to be 2x the original.");

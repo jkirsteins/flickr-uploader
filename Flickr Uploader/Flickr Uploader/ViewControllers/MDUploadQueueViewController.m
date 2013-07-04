@@ -7,9 +7,10 @@
 //
 
 #import "MDUploadQueueViewController.h"
+#import "MDUploadQueueCell.h"
 
 @interface MDUploadQueueViewController ()
-
+@property (nonatomic,strong) ALAssetsLibrary *library;
 @end
 
 @implementation MDUploadQueueViewController
@@ -26,7 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"small"];
+//    [self.collectionView registerClass:[MDUploadQueueCell class] forCellWithReuseIdentifier:@"small"];
+    [self loadPhotos];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -37,7 +39,49 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.thumbnailCache clearMemoryCache];
+}
+
+#pragma mark -
+#pragma mark Asset access
+static int x = 0;
+-(void)addPhoto:(ALAsset *)asset
+{
+    if (++x > 6) return;
+    [self.uploadQueue addAssetToQueueIfNotProcessed:asset];
+}
+
+-(void)loadPhotos
+{
+    self.library = [[ALAssetsLibrary alloc] init];
+
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        [self.library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
+         
+                                    usingBlock:^(ALAssetsGroup *group, BOOL *stop)
+         {
+             [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+             [group enumerateAssetsUsingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop)
+              {
+                  // The end of the enumeration is signaled by asset == nil.
+                  if (alAsset)
+                  {
+                      //                      ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                      [self addPhoto:alAsset];
+                  }
+                  else
+                  {
+                      [self.collectionView reloadData];
+                  }
+              }];
+         }
+         
+                                  failureBlock: ^(NSError *error) {
+                                      // Typically you should handle an error more gracefully than this.
+                                      NSLog(@"No groups");
+                                  }];
+    }
 }
 
 #pragma mark - LXReorderableCollectionViewDataSource methods
@@ -54,14 +98,15 @@
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath {
-    return fromIndexPath.section == toIndexPath.section;
+    return NO;// fromIndexPath.section == toIndexPath.section;
 }
 
 #pragma mark - UICollectionView Datasource
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    if (section == 0) return 1;
-    return 13;
+    if (section == 0) return [self.uploadQueue count] > 0 ? 1 : 0;
+    return 5;
+    return MAX(0, [self.uploadQueue count]-1);
 }
 
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
@@ -69,8 +114,21 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"small" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor grayColor];
+    MDUploadQueueCell *cell = (MDUploadQueueCell*)[cv dequeueReusableCellWithReuseIdentifier:@"small" forIndexPath:indexPath];
+    cell.generation+=1;
+    
+    ALAsset *asset = nil;
+    if (indexPath.section == 0)
+        asset = [self.uploadQueue assetWithIndexOrNil:0];
+    else
+        asset = [self.uploadQueue assetWithIndexOrNil:((uint)indexPath.row)+1];
+    
+    cell.backgroundColor = [UIColor redColor];
+    [cell setAssetAsync:asset withCache:self.thumbnailCache forGeneration:cell.generation];
+    
+    // TODO: make sure UIImageView automatically expands to fill
+    [cell.imageView setBounds:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)];
+
     return cell;
 }
 

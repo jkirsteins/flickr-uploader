@@ -15,8 +15,8 @@
 
 -(void)addAssetToQueueIfNotProcessed:(ALAsset*)asset;
 -(void)shiftAssetAndMarkProcessed;
--(ALAsset*)firstAsset;
--(BOOL)moveAssetFromIndex:(int)indexFrom toIndex:(int)indexTo;
+-(ALAsset*)assetWithIndexOrNil:(NSUInteger)ix;
+-(BOOL)moveAssetFromIndex:(NSUInteger)indexFrom toIndex:(NSUInteger)indexTo;
 -(NSUInteger)count;
 
 @end

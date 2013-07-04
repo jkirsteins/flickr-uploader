@@ -41,6 +41,8 @@
                 }
                 self.MD_hashedIdentifier = output;
             }
+            // TODO remove free() and learn to find leaks via Instruments
+            free(buffer);
         }
     }
     return self.MD_hashedIdentifier;
