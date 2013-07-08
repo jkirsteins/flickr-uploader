@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E2069C0E178571B300675485 /* CachedThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = E2069C0D178571B300675485 /* CachedThumbnail.m */; };
+		E20057AF1789E47800C4AAE3 /* MDAssetVerificationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E20057AE1789E47800C4AAE3 /* MDAssetVerificationOperation.m */; };
 		E2069C10178596B000675485 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C0F178596B000675485 /* NewRelicAgent.framework */; };
 		E2069C12178596D800675485 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C11178596D800675485 /* CoreTelephony.framework */; };
 		E2069C14178596DE00675485 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C13178596DE00675485 /* SystemConfiguration.framework */; };
 		E2069C16178596E400675485 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C15178596E400675485 /* libz.dylib */; };
-		E221BCF81785B233007113B5 /* UIImage+Thumbnails.m in Sources */ = {isa = PBXBuildFile; fileRef = E221BCF71785B233007113B5 /* UIImage+Thumbnails.m */; };
 		E221BCFB1785C1FC007113B5 /* MDUploadQueueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E221BCFA1785C1FC007113B5 /* MDUploadQueueCell.m */; };
 		E22A665917830644001224F7 /* MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A665817830644001224F7 /* MDAssetQueue.m */; };
-		E23B15F4178457B200888DEB /* ALAsset+MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */; };
 		E23B15F61784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */; };
 		E23B9C981767A9A10085E174 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23B9C971767A9A10085E174 /* Foundation.framework */; };
 		E23B9C9A1767A9A10085E174 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23B9C991767A9A10085E174 /* CoreGraphics.framework */; };
@@ -27,9 +25,7 @@
 		E23B9CB81767A9A10085E174 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23B9C971767A9A10085E174 /* Foundation.framework */; };
 		E23B9CB91767A9A10085E174 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23B9C9B1767A9A10085E174 /* UIKit.framework */; };
 		E23B9CC11767A9A10085E174 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E23B9CBF1767A9A10085E174 /* InfoPlist.strings */; };
-		E23B9CC31767A9A10085E174 /* Flickr_UploaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B9CC21767A9A10085E174 /* Flickr_UploaderTests.m */; };
-		E249E414177C0EC700F55D7C /* MDCurrentlyProcessingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E249E413177C0EC700F55D7C /* MDCurrentlyProcessingCell.m */; };
-		E249E417177C13EE00F55D7C /* MDQueuedPictureCell4.m in Sources */ = {isa = PBXBuildFile; fileRef = E249E416177C13EE00F55D7C /* MDQueuedPictureCell4.m */; };
+		E23B9CC31767A9A10085E174 /* MDAssetVerificationOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23B9CC21767A9A10085E174 /* MDAssetVerificationOperationTests.m */; };
 		E24D2B26177CC73A00E4D58E /* MDUploadQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E24D2B25177CC73A00E4D58E /* MDUploadQueueViewController.m */; };
 		E26A84EB17855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = E26A84EA17855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.m */; };
 		E26C02BD17840AC500EB8300 /* MDAssetQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E26C02BC17840AC500EB8300 /* MDAssetQueueTests.m */; };
@@ -62,7 +58,6 @@
 		E26C038517840F9800EB8300 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26C038417840F9800EB8300 /* CoreData.framework */; };
 		E278217C177A25C80064278F /* UploadLog.m in Sources */ = {isa = PBXBuildFile; fileRef = E278217B177A25C80064278F /* UploadLog.m */; };
 		E2782180177A267C0064278F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E278217E177A267C0064278F /* Model.xcdatamodeld */; };
-		E2782185177A2C190064278F /* MDUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2782184177A2C190064278F /* MDUploadViewController.m */; };
 		E29EAE7F177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E29EAE7E177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.m */; };
 		E2DAFE05176DFBF500A5C316 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE04176DFBF500A5C316 /* NSString+MD5.m */; };
 		E2DAFE1F176DFC0600A5C316 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE07176DFC0600A5C316 /* NSObject+SBJson.m */; };
@@ -86,9 +81,8 @@
 		E2DAFE41176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE3C176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m */; };
 		E2DAFE42176DFC4000A5C316 /* MDOAuthToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE3E176DFC4000A5C316 /* MDOAuthToken.m */; };
 		E2DAFE47176DFE2700A5C316 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2DAFE46176DFE2700A5C316 /* iPhone.storyboard */; };
-		E2E9BBBA1784B6BB00C9797B /* MDAssetImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E9BBB91784B6BB00C9797B /* MDAssetImageCache.m */; };
-		E2E9BBBF1784BD7F00C9797B /* MDAssetImageCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E9BBBE1784BD7F00C9797B /* MDAssetImageCacheTests.m */; };
 		E2F2C443177F798500528D02 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F2C441177F793600528D02 /* libOCMock.a */; };
+		E2F424C3178B014D00C34EDC /* ALAsset+MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F424C2178B014D00C34EDC /* ALAsset+MDAssetQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,20 +96,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E2069C0C178571B300675485 /* CachedThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CachedThumbnail.h; path = Model/CachedThumbnail.h; sourceTree = "<group>"; };
-		E2069C0D178571B300675485 /* CachedThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CachedThumbnail.m; path = Model/CachedThumbnail.m; sourceTree = "<group>"; };
+		E20057AD1789E47800C4AAE3 /* MDAssetVerificationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDAssetVerificationOperation.h; path = "Background Operations/MDAssetVerificationOperation.h"; sourceTree = "<group>"; };
+		E20057AE1789E47800C4AAE3 /* MDAssetVerificationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDAssetVerificationOperation.m; path = "Background Operations/MDAssetVerificationOperation.m"; sourceTree = "<group>"; };
 		E2069C0F178596B000675485 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		E2069C11178596D800675485 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		E2069C13178596DE00675485 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E2069C15178596E400675485 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		E221BCF61785B233007113B5 /* UIImage+Thumbnails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Thumbnails.h"; sourceTree = "<group>"; };
-		E221BCF71785B233007113B5 /* UIImage+Thumbnails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Thumbnails.m"; sourceTree = "<group>"; };
 		E221BCF91785C1FC007113B5 /* MDUploadQueueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDUploadQueueCell.h; path = CollectionViewCells/MDUploadQueueCell.h; sourceTree = "<group>"; };
 		E221BCFA1785C1FC007113B5 /* MDUploadQueueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDUploadQueueCell.m; path = CollectionViewCells/MDUploadQueueCell.m; sourceTree = "<group>"; };
 		E22A665717830644001224F7 /* MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAssetQueue.h; sourceTree = "<group>"; };
 		E22A665817830644001224F7 /* MDAssetQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAssetQueue.m; sourceTree = "<group>"; };
-		E23B15F2178457B200888DEB /* ALAsset+MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+MDAssetQueue.h"; sourceTree = "<group>"; };
-		E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+MDAssetQueue.m"; sourceTree = "<group>"; };
 		E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAssetCategoryMDAssetQueueTests.m; sourceTree = "<group>"; };
 		E23B9C941767A9A10085E174 /* Flickr Uploader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flickr Uploader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E23B9C971767A9A10085E174 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -130,11 +120,7 @@
 		E23B9CB61767A9A10085E174 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E23B9CBE1767A9A10085E174 /* Flickr UploaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Flickr UploaderTests-Info.plist"; sourceTree = "<group>"; };
 		E23B9CC01767A9A10085E174 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E23B9CC21767A9A10085E174 /* Flickr_UploaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Flickr_UploaderTests.m; sourceTree = "<group>"; };
-		E249E412177C0EC700F55D7C /* MDCurrentlyProcessingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDCurrentlyProcessingCell.h; path = TableViewCells/MDCurrentlyProcessingCell.h; sourceTree = "<group>"; };
-		E249E413177C0EC700F55D7C /* MDCurrentlyProcessingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDCurrentlyProcessingCell.m; path = TableViewCells/MDCurrentlyProcessingCell.m; sourceTree = "<group>"; };
-		E249E415177C13EE00F55D7C /* MDQueuedPictureCell4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDQueuedPictureCell4.h; path = TableViewCells/MDQueuedPictureCell4.h; sourceTree = "<group>"; };
-		E249E416177C13EE00F55D7C /* MDQueuedPictureCell4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDQueuedPictureCell4.m; path = TableViewCells/MDQueuedPictureCell4.m; sourceTree = "<group>"; };
+		E23B9CC21767A9A10085E174 /* MDAssetVerificationOperationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDAssetVerificationOperationTests.m; sourceTree = "<group>"; };
 		E24D2B24177CC73A00E4D58E /* MDUploadQueueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDUploadQueueViewController.h; path = ViewControllers/MDUploadQueueViewController.h; sourceTree = "<group>"; };
 		E24D2B25177CC73A00E4D58E /* MDUploadQueueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDUploadQueueViewController.m; path = ViewControllers/MDUploadQueueViewController.m; sourceTree = "<group>"; };
 		E25F80DA176EC22800328511 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -199,8 +185,6 @@
 		E278217A177A25C80064278F /* UploadLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadLog.h; path = Model/UploadLog.h; sourceTree = "<group>"; };
 		E278217B177A25C80064278F /* UploadLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadLog.m; path = Model/UploadLog.m; sourceTree = "<group>"; };
 		E278217F177A267C0064278F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		E2782183177A2C190064278F /* MDUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDUploadViewController.h; path = ViewControllers/MDUploadViewController.h; sourceTree = "<group>"; };
-		E2782184177A2C190064278F /* MDUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDUploadViewController.m; path = ViewControllers/MDUploadViewController.m; sourceTree = "<group>"; };
 		E29EAE7D177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		E29EAE7E177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		E2DAFE03176DFBF500A5C316 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Utilities/NSString+MD5.h"; sourceTree = "<group>"; };
@@ -247,10 +231,9 @@
 		E2DAFE3D176DFC4000A5C316 /* MDOAuthToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDOAuthToken.h; sourceTree = "<group>"; };
 		E2DAFE3E176DFC4000A5C316 /* MDOAuthToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDOAuthToken.m; sourceTree = "<group>"; };
 		E2DAFE46176DFE2700A5C316 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iPhone.storyboard; path = Storyboards/iPhone.storyboard; sourceTree = "<group>"; };
-		E2E9BBB81784B6BB00C9797B /* MDAssetImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAssetImageCache.h; sourceTree = "<group>"; };
-		E2E9BBB91784B6BB00C9797B /* MDAssetImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAssetImageCache.m; sourceTree = "<group>"; };
-		E2E9BBBE1784BD7F00C9797B /* MDAssetImageCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAssetImageCacheTests.m; sourceTree = "<group>"; };
 		E2F2C441177F793600528D02 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = usr/lib/libOCMock.a; sourceTree = "<group>"; };
+		E2F424C1178B014D00C34EDC /* ALAsset+MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+MDAssetQueue.h"; sourceTree = "<group>"; };
+		E2F424C2178B014D00C34EDC /* ALAsset+MDAssetQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+MDAssetQueue.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +266,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E20057AC1789E45200C4AAE3 /* Background Operations */ = {
+			isa = PBXGroup;
+			children = (
+				E20057AD1789E47800C4AAE3 /* MDAssetVerificationOperation.h */,
+				E20057AE1789E47800C4AAE3 /* MDAssetVerificationOperation.m */,
+			);
+			name = "Background Operations";
+			sourceTree = "<group>";
+		};
 		E221BCFC1785C201007113B5 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,9 +325,11 @@
 		E23B9C9D1767A9A10085E174 /* Flickr Uploader */ = {
 			isa = PBXGroup;
 			children = (
+				E2F424C1178B014D00C34EDC /* ALAsset+MDAssetQueue.h */,
+				E2F424C2178B014D00C34EDC /* ALAsset+MDAssetQueue.m */,
+				E20057AC1789E45200C4AAE3 /* Background Operations */,
 				E29EAE7C177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout */,
 				E221BCFC1785C201007113B5 /* CollectionViewCells */,
-				E249E411177C0E9700F55D7C /* TableViewCells */,
 				E25F80D6176EC16B00328511 /* ViewControllers */,
 				E2DAFE37176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.h */,
 				E2DAFE38176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.m */,
@@ -352,12 +346,6 @@
 				E278217D177A25D90064278F /* Model */,
 				E22A665717830644001224F7 /* MDAssetQueue.h */,
 				E22A665817830644001224F7 /* MDAssetQueue.m */,
-				E23B15F2178457B200888DEB /* ALAsset+MDAssetQueue.h */,
-				E23B15F3178457B200888DEB /* ALAsset+MDAssetQueue.m */,
-				E2E9BBB81784B6BB00C9797B /* MDAssetImageCache.h */,
-				E2E9BBB91784B6BB00C9797B /* MDAssetImageCache.m */,
-				E221BCF61785B233007113B5 /* UIImage+Thumbnails.h */,
-				E221BCF71785B233007113B5 /* UIImage+Thumbnails.m */,
 			);
 			path = "Flickr Uploader";
 			sourceTree = "<group>";
@@ -376,11 +364,10 @@
 		E23B9CBC1767A9A10085E174 /* Flickr UploaderTests */ = {
 			isa = PBXGroup;
 			children = (
-				E23B9CC21767A9A10085E174 /* Flickr_UploaderTests.m */,
+				E23B9CC21767A9A10085E174 /* MDAssetVerificationOperationTests.m */,
 				E26C02BC17840AC500EB8300 /* MDAssetQueueTests.m */,
 				E23B15F51784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m */,
 				E23B9CBD1767A9A10085E174 /* Supporting Files */,
-				E2E9BBBE1784BD7F00C9797B /* MDAssetImageCacheTests.m */,
 				E26A84E917855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.h */,
 				E26A84EA17855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.m */,
 			);
@@ -396,24 +383,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E249E411177C0E9700F55D7C /* TableViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				E249E412177C0EC700F55D7C /* MDCurrentlyProcessingCell.h */,
-				E249E413177C0EC700F55D7C /* MDCurrentlyProcessingCell.m */,
-				E249E415177C13EE00F55D7C /* MDQueuedPictureCell4.h */,
-				E249E416177C13EE00F55D7C /* MDQueuedPictureCell4.m */,
-			);
-			name = TableViewCells;
-			sourceTree = "<group>";
-		};
 		E25F80D6176EC16B00328511 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				E2DAFE3B176DFC4000A5C316 /* MDFlickrAuthenticationViewController.h */,
 				E2DAFE3C176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m */,
-				E2782183177A2C190064278F /* MDUploadViewController.h */,
-				E2782184177A2C190064278F /* MDUploadViewController.m */,
 				E24D2B24177CC73A00E4D58E /* MDUploadQueueViewController.h */,
 				E24D2B25177CC73A00E4D58E /* MDUploadQueueViewController.m */,
 			);
@@ -525,8 +499,6 @@
 			isa = PBXGroup;
 			children = (
 				E278217E177A267C0064278F /* Model.xcdatamodeld */,
-				E2069C0C178571B300675485 /* CachedThumbnail.h */,
-				E2069C0D178571B300675485 /* CachedThumbnail.m */,
 				E278217A177A25C80064278F /* UploadLog.h */,
 				E278217B177A25C80064278F /* UploadLog.m */,
 			);
@@ -712,6 +684,7 @@
 				E2DAFE27176DFC0600A5C316 /* SBJsonStreamWriterState.m in Sources */,
 				E2DAFE21176DFC0600A5C316 /* SBJsonStreamParser.m in Sources */,
 				E2DAFE40176DFC4000A5C316 /* MDAppDelegate.m in Sources */,
+				E20057AF1789E47800C4AAE3 /* MDAssetVerificationOperation.m in Sources */,
 				E22A665917830644001224F7 /* MDAssetQueue.m in Sources */,
 				E2DAFE1F176DFC0600A5C316 /* NSObject+SBJson.m in Sources */,
 				E26C035017840C9700EB8300 /* MagicalImportFunctions.m in Sources */,
@@ -719,7 +692,6 @@
 				E221BCFB1785C1FC007113B5 /* MDUploadQueueCell.m in Sources */,
 				E26C036217840C9700EB8300 /* NSManagedObject+MagicalFinders.m in Sources */,
 				E2DAFE36176DFC1700A5C316 /* RXFlickr+checkToken.m in Sources */,
-				E23B15F4178457B200888DEB /* ALAsset+MDAssetQueue.m in Sources */,
 				E23B9CA41767A9A10085E174 /* main.m in Sources */,
 				E26C036417840C9700EB8300 /* NSManagedObject+MagicalRecord.m in Sources */,
 				E26C037A17840C9700EB8300 /* MagicalRecord+iCloud.m in Sources */,
@@ -734,22 +706,18 @@
 				E26C036C17840C9700EB8300 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				E2DAFE25176DFC0600A5C316 /* SBJsonStreamWriter.m in Sources */,
 				E2DAFE34176DFC1700A5C316 /* NSString+URLEncodeString.m in Sources */,
-				E221BCF81785B233007113B5 /* UIImage+Thumbnails.m in Sources */,
 				E2DAFE26176DFC0600A5C316 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				E26C035E17840C9700EB8300 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				E2DAFE29176DFC0600A5C316 /* SBJsonUTF8Stream.m in Sources */,
 				E2DAFE28176DFC0600A5C316 /* SBJsonTokeniser.m in Sources */,
-				E2E9BBBA1784B6BB00C9797B /* MDAssetImageCache.m in Sources */,
 				E24D2B26177CC73A00E4D58E /* MDUploadQueueViewController.m in Sources */,
 				E26C035C17840C9700EB8300 /* NSString+MagicalDataImport.m in Sources */,
 				E26C035417840C9700EB8300 /* NSEntityDescription+MagicalDataImport.m in Sources */,
-				E249E417177C13EE00F55D7C /* MDQueuedPictureCell4.m in Sources */,
 				E26C036E17840C9700EB8300 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				E2DAFE2A176DFC0600A5C316 /* SBJsonWriter.m in Sources */,
 				E26C036617840C9700EB8300 /* NSManagedObject+MagicalRequests.m in Sources */,
 				E2DAFE41176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m in Sources */,
 				E278217C177A25C80064278F /* UploadLog.m in Sources */,
-				E2069C0E178571B300675485 /* CachedThumbnail.m in Sources */,
 				E2DAFE35176DFC1700A5C316 /* RXFlickr.m in Sources */,
 				E26C038217840C9700EB8300 /* MagicalRecord.m in Sources */,
 				E26C036817840C9700EB8300 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
@@ -761,13 +729,12 @@
 				E26C035817840C9700EB8300 /* NSObject+MagicalDataImport.m in Sources */,
 				E26C037217840C9700EB8300 /* NSPersistentStore+MagicalRecord.m in Sources */,
 				E2782180177A267C0064278F /* Model.xcdatamodeld in Sources */,
-				E249E414177C0EC700F55D7C /* MDCurrentlyProcessingCell.m in Sources */,
 				E26C037417840C9700EB8300 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				E2DAFE24176DFC0600A5C316 /* SBJsonStreamParserState.m in Sources */,
 				E26C035A17840C9700EB8300 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
-				E2782185177A2C190064278F /* MDUploadViewController.m in Sources */,
 				E2DAFE22176DFC0600A5C316 /* SBJsonStreamParserAccumulator.m in Sources */,
 				E26C037617840C9700EB8300 /* MagicalRecord+Actions.m in Sources */,
+				E2F424C3178B014D00C34EDC /* ALAsset+MDAssetQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,10 +742,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E23B9CC31767A9A10085E174 /* Flickr_UploaderTests.m in Sources */,
+				E23B9CC31767A9A10085E174 /* MDAssetVerificationOperationTests.m in Sources */,
 				E26C02BD17840AC500EB8300 /* MDAssetQueueTests.m in Sources */,
 				E26A84EB17855A7D00B2A9AB /* OCMockRecorder+ExtraMethods.m in Sources */,
-				E2E9BBBF1784BD7F00C9797B /* MDAssetImageCacheTests.m in Sources */,
 				E23B15F61784580900888DEB /* ALAssetCategoryMDAssetQueueTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -27,7 +27,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self.collectionView registerClass:[MDUploadQueueCell class] forCellWithReuseIdentifier:@"small"];
+    
+    // TODO link the delegate via interface builder?
+    self.uploadQueue.delegate = self;
+    
     [self loadPhotos];
 }
 
@@ -39,37 +42,35 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    [self.thumbnailCache clearMemoryCache];
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+#pragma mark -
+#pragma mark MDAssetQueueDelegate
+
+static NSMutableArray *tttPaths;
+-(void)didFinishAddingAsset:(ALAsset*)asset withIndex:(NSUInteger)index;
 {
-    NSArray *visibleCells = [self.collectionView visibleCells];
-    [visibleCells enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        MDUploadQueueCell *cell = (MDUploadQueueCell *)obj;
-        
-        NSIndexPath *indexPath = [(UICollectionView*)scrollView indexPathForCell:cell];
-        ALAsset *asset = [self.uploadQueue assetWithIndexOrNil:indexPath.section+indexPath.row];
-        
-        NSLog(@"didEndDecelerating: setting asset for IP %d.%d, G: %d", indexPath.section, indexPath.row, cell.generation);
-        [cell setAssetAsync:asset withCache:self.thumbnailCache forGeneration:cell.generation];
-    }];
+    if (tttPaths == nil) tttPaths = [[NSMutableArray alloc] init];
+    
+    // TODO: put uint->NSIndexPath in one place
+    uint section = (index < 1 ? 0 : 1);
+    uint row = index - section;
+    NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
+    [tttPaths addObject:path];
+    
+    if ([tttPaths count] % 15 == 0)
+    {
+        [self.collectionView insertItemsAtIndexPaths:tttPaths];
+        [tttPaths removeAllObjects];
+    }
 }
 
 #pragma mark -
 #pragma mark Asset access
-static int sup = 0;
+
 -(void)addPhoto:(ALAsset *)asset
 {
-    UICollectionView *view = self.collectionView;
-    sup++;
-    [self.uploadQueue addAssetToQueueIfNotProcessedAsync:asset withCallback:^() {
-        sup--;
-        if (sup % 5 == 0)
-        {
-            [view reloadData];
-        }
-    }];
+    [self.uploadQueue beginAddingAsset:asset];
 }
 
 -(void)loadPhotos
@@ -109,18 +110,18 @@ static int sup = 0;
 #pragma mark - LXReorderableCollectionViewDataSource methods
 
 - (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
-    //    PlayingCard *playingCard = [self.deck objectAtIndex:fromIndexPath.item];
-    
-    //    [self.deck removeObjectAtIndex:fromIndexPath.item];
-    //    [self.deck insertObject:playingCard atIndex:toIndexPath.item];
+
+    [self.uploadQueue moveAssetFromIndex:fromIndexPath.section+fromIndexPath.row toIndex:toIndexPath.section+toIndexPath.row];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    // TODO: implement self.uploadQueue canMoveAssetFromIndex:toIndex:
     return indexPath.section == 1;
+    
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath {
-    return NO;// fromIndexPath.section == toIndexPath.section;
+    return fromIndexPath.section == toIndexPath.section;
 }
 
 #pragma mark - UICollectionView Datasource
@@ -128,7 +129,9 @@ static int sup = 0;
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
     if (section == 0) return [self.uploadQueue count] > 0 ? 1 : 0;
 
-    return MAX(0, [self.uploadQueue count]-1);
+    NSInteger count = (NSInteger)[self.uploadQueue count];
+    NSInteger res = MAX(0, count-1);
+    return res;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
@@ -137,38 +140,22 @@ static int sup = 0;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MDUploadQueueCell *cell = (MDUploadQueueCell*)[cv dequeueReusableCellWithReuseIdentifier:@"small" forIndexPath:indexPath];
-    cell.generation+=1;
     
     cell.imageView.image = nil;
     cell.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
 
-    ALAsset *asset = nil;
-    asset = [self.uploadQueue assetWithIndexOrNil:indexPath.section+indexPath.row];
+    uint ix = indexPath.section + indexPath.row;
     
-    if (!cv.decelerating)
-    {
-        [cell setAssetAsync:asset withCache:self.thumbnailCache forGeneration:cell.generation];
-    }
+    ALAsset *asset = [self.uploadQueue assetWithIndexOrNil:ix];
+    
+    if (indexPath.section == 0)
+        cell.imageView.image = [UIImage imageWithCGImage:asset.aspectRatioThumbnail];
     else
-    {
-        UIImage *img = [self.thumbnailCache thumbnailForAsset:asset
-                                      withWidth:cell.bounds.size.width
-                                      andHeight:cell.bounds.size.height];
-        if (img != nil)
-        {
-            // TODO hacky
-            cell.imageView.image = img;
-            CGRect f = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
-            cell.imageView.frame = f;
-            cell.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        }
-    }
+        cell.imageView.image = [UIImage imageWithCGImage:asset.thumbnail];
     
-    //NSLog(@"Setting asset for a tile \\w indexPath: s: %d r: %d g: %d.", indexPath.section, indexPath.row, cell.generation);
-    //[cell setAssetAsync:asset withCache:self.thumbnailCache forGeneration:cell.generation];
+    cell.imageView.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
+    cell.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    
-
     return cell;
 }
 
@@ -177,9 +164,7 @@ static int sup = 0;
 
 // 1
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    NSString *searchTerm = self.searches[indexPath.section]; FlickrPhoto *photo =
-//    self.searchResults[searchTerm][indexPath.row];
-    // 2
+
     if (indexPath.section == 0)
     {
         return CGSizeMake(collectionView.bounds.size.width, collectionView.bounds.size.width*0.75f);

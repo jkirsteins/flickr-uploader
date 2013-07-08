@@ -9,12 +9,13 @@
 #import "ALAsset+MDAssetQueue.h"
 #import <objc/runtime.h>
 #import <CommonCrypto/CommonDigest.h>
-
+@import Foundation;
 @implementation ALAsset(MDAssetQueue)
 
 @dynamic MD_hashedIdentifier;
 
 - (NSString*)MD_hashedIdentifier {
+    
     return (NSString*)objc_getAssociatedObject(self, @selector(MD_hashedIdentifier));
 }
 
@@ -41,7 +42,6 @@
                 }
                 self.MD_hashedIdentifier = output;
             }
-            // TODO remove free() and learn to find leaks via Instruments
             free(buffer);
         }
     }

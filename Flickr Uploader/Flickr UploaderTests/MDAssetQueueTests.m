@@ -7,11 +7,13 @@
 //
 
 #import <XCTest/XCTest.h>
-//#import "CoreData+MagicalRecord.h"
 #import "MDAssetQueue.h"
+#import <OCMock/OCMock.h>
 
 @interface MDAssetQueueTests : XCTestCase
+@property (strong,nonatomic) NSOperationQueue *operationQueue;
 @property (strong,nonatomic) MDAssetQueue *queue;
+@property (strong,nonatomic) MDAssetVerificationOperation *lastOperation;
 @end
 
 @implementation MDAssetQueueTests
@@ -26,14 +28,24 @@
 
 +(void)tearDown
 {
+    
 }
 
 #pragma mark -
 #pragma mark Instance setup and teardown
 
+- (void)addOperation:(MDAssetVerificationOperation*)operation
+{
+    self.lastOperation = operation;
+}
+
 - (void)setUp
 {
     [super setUp];
+    
+    id verificationQueue = [OCMockObject mockForClass:[NSOperationQueue class]];
+    [[[verificationQueue stub] andCall:@selector(addOperation:) onObject:self] addOperation:[OCMArg any]];
+    self.operationQueue = verificationQueue;
     
     // Without the following line, the very first
     // test seems to fail often (but not 100%), because
@@ -42,11 +54,11 @@
     // Not sure what causes the bug. Leaving this here for time being.
     //
     // TODO: Get to the bottom of why this method is required
-    [MagicalRecord cleanUp];
+//    [MagicalRecord cleanUp];
     
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
     
-    self.queue = [[MDAssetQueue alloc] init];
+    self.queue = [[MDAssetQueue alloc] initWithVerificationQueue:verificationQueue];
 }
 
 - (void)tearDown
@@ -57,49 +69,82 @@
 }
 
 #pragma mark -
-#pragma mark addAssetToQueueIfNotProcessed
+#pragma mark beginAddingAsset:
 
-- (void)testAddAssetToQueueIfNotProcessed_addNewAssetToEmptyQueue_becomesFirstAsset
+-(void)testBeginAddingAsset_addNewAsset_startsVerificationOperation
 {
     ALAsset *asset = [[ALAsset alloc] init];
-    [self.queue addAssetToQueueIfNotProcessed:asset];
-    XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], asset,
-                  @"Expected -[firstAsset] to return added asset.");
+    [self.queue beginAddingAsset:asset];
+  
+    MDAssetVerificationOperation *op = self.lastOperation;
+    
+    XCTAssertEqualObjects(op.asset, asset, @"Expected the op asset to be the same object as added asset.");
 }
 
-- (void)testAddAssetToQueueIfNotProcessed_addNewAssetToNonEmptyQueue_doesNotBecomeFirstAsset
+-(void)testBeginAddingAsset_addNilAsset_callsDelegateFailureInCurrentThread
 {
-    ALAsset *firstAsset = [[ALAsset alloc] init];
-    ALAsset *secondAsset = [[ALAsset alloc] init];
+    id delegate = [OCMockObject mockForProtocol:@protocol(MDAssetQueueDelegate)];
+    [[delegate expect] didNotAddAsset:nil];
     
-    [self.queue addAssetToQueueIfNotProcessed:firstAsset];
-    [self.queue addAssetToQueueIfNotProcessed:secondAsset];
+    self.queue.delegate = delegate;
     
-    XCTAssertTrue([self.queue assetWithIndexOrNil:0] == firstAsset,
-                  @"Expected -[firstAsset] to return the first asset.");
+    [self.queue beginAddingAsset:nil];
+    
+    [delegate verify];
+    XCTAssertNil(self.lastOperation, @"Did not expect an operation to be created.");
 }
 
-- (void)testAddAssetToQueueIfNotProcessed_addProcessedAssetToSameQueueInstance_addsOnlyOnce
+-(void)testBeginAddingAsset_addAssetWhenDelegateMissingOptional_optionalDelegateFailureNotInvoked
+{
+    id delegate = [OCMockObject mockForClass:[NSObject class]];
+    self.queue.delegate = delegate;
+    [self.queue beginAddingAsset:nil];
+    
+    [delegate verify];
+    XCTAssertNil(self.lastOperation, @"Did not expect an operation to be created.");
+}
+
+#pragma mark -
+#pragma mark waitUntilAllOperationsAreFinished
+
+-(void)testWaitUntilAllOperationsAreFinished_invoke_forwardsToOperationQueue
+{
+    [[(id)self.operationQueue expect] waitUntilAllOperationsAreFinished];
+    [self.queue waitUntilAllOperationsAreFinished];
+    [(id)self.operationQueue verify];
+}
+
+#pragma mark -
+#pragma mark didVerifyAsset:canAddToQueue:
+
+-(void)testDidVerifyAsset_canAddToQueue_addsToQueue
 {
     ALAsset *asset = [[ALAsset alloc] init];
-
-    [self.queue addAssetToQueueIfNotProcessed:asset];
-    [self.queue shiftAssetAndMarkProcessed];
-    [self.queue addAssetToQueueIfNotProcessed:asset];
-    XCTAssertEquals([self.queue count], (NSUInteger)0,
-                  @"Expected -[count] to return 1 after adding same asset twice (in the same Core Data session).");
+    [self.queue didVerifyAsset:asset canAddToQueue:YES];
+    XCTAssertEqualObjects(asset,
+                          [self.queue assetWithIndexOrNil:0],
+                          @"Expected added asset to be the first queue asset.");
 }
 
-- (void)testAddAssetToQueueIfNotProcessed_addProcessedAssetToDifferentQueueInstances_addsOnlyOnce
+-(void)testDidVerifyAsset_canAddToQueue_invokesDelegate
 {
     ALAsset *asset = [[ALAsset alloc] init];
-    [self.queue addAssetToQueueIfNotProcessed:asset];
-    [self.queue shiftAssetAndMarkProcessed];
+    id delegate = [OCMockObject mockForProtocol:@protocol(MDAssetQueueDelegate)];
+    [[delegate expect] didFinishAddingAsset:asset withIndex:0];
+    self.queue.delegate = delegate;
+    [self.queue didVerifyAsset:asset canAddToQueue:YES];
     
-    MDAssetQueue *queue2 = [[MDAssetQueue alloc] init];
-    [queue2 addAssetToQueueIfNotProcessed:asset];
+    [delegate verify];
+}
 
-    XCTAssertEquals([queue2 count], (NSUInteger)0, @"Expected -[count] to return 0 after adding an asset that was processed in a different MDAssetQueue instance.");
+-(void)testDidVerifyAsset_canNotAddToQueue_doesNotAddToQueue
+{
+    ALAsset *asset = [[ALAsset alloc] init];
+    id delegate = [OCMockObject mockForProtocol:@protocol(MDAssetQueueDelegate)];
+    self.queue.delegate = delegate;
+    [self.queue didVerifyAsset:asset canAddToQueue:NO];
+    
+    [delegate verify];
 }
 
 #pragma mark -
@@ -113,40 +158,42 @@
 
 -(void)testCount_callOnNonEmptyQueue_returnsAssetCount
 {
-    [self.queue addAssetToQueueIfNotProcessed:[[ALAsset alloc]init]];
-    XCTAssertTrue([self.queue count] == 1,
-                  @"Expected -[count] to return 1 after adding an item.");
+    ALAsset *asset = [[ALAsset alloc] init];
+    [self.queue didVerifyAsset:asset canAddToQueue:YES];
+    [self.queue didVerifyAsset:asset canAddToQueue:YES];
+    
+    XCTAssertEquals(self.queue.count, (uint)2, @"Expected -[count] to return 2.");
 }
 
 #pragma mark -
-#pragma mark shiftAssetFromQueue
+#pragma mark shiftAssetAndMarkProcessed
 
--(void)testShiftAssetFromQueue_callOnEmptyQueue_doesNothing
+-(void)testShiftAssetAndMarkProcessed_callOnEmptyQueue_doesNothing
 {
     [self.queue shiftAssetAndMarkProcessed];
     XCTAssertEquals([self.queue count], (NSUInteger)0, @"Expected -[count] to return 0.");
 }
 
--(void)testShiftAssetFromQueue_callOnNonEmptyQueue_removesItem
+-(void)testShiftAssetAndMarkProcessed_callOnNonEmptyQueue_removesItem
 {
     ALAsset *asset = [[ALAsset alloc] init];
-    [self.queue addAssetToQueueIfNotProcessed:asset];
+    [self.queue didVerifyAsset:asset canAddToQueue:YES];
     [self.queue shiftAssetAndMarkProcessed];
-    XCTAssertEquals([self.queue count], (NSUInteger)0, @"Expected -[count] to return 0.");
+    XCTAssertEquals([self.queue count], (NSUInteger)0, @"Expected -[count] to return 0 after shifting the only asset in queue.");
 }
 
 #pragma mark -
-#pragma mark assetWithIndexOrNil
+#pragma mark assetWithIndexOrNil:
 
 -(void)testAssetWithIndexOrNil_callOnEmptyQueue_returnsNil
 {
-    XCTAssertNil([self.queue assetWithIndexOrNil:0], @"Expected -[firstAsset] to return nil on an empty queue.");
+    XCTAssertNil([self.queue assetWithIndexOrNil:0], @"Expected -[assetWithIndexOrNil:0] to return nil on an empty queue.");
 }
 
 -(void)testAssetWithIndexOrNil_callWithTooGreatIndex_returnsNil
 {
     ALAsset *asset =[[ALAsset alloc] init];
-    [self.queue addAssetToQueueIfNotProcessed:asset];
+    [self.queue didVerifyAsset:asset canAddToQueue:YES];
     XCTAssertNil([self.queue assetWithIndexOrNil:1], @"Expected -[firstAsset] to return nil when index is too high.");
 }
 
@@ -155,24 +202,24 @@
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNotProcessed:firstItem];
-    [self.queue addAssetToQueueIfNotProcessed:secondItem];
+    [self.queue didVerifyAsset:firstItem canAddToQueue:YES];
+    [self.queue didVerifyAsset:secondItem canAddToQueue:YES];
     
     XCTAssertEqualObjects([self.queue assetWithIndexOrNil:1], secondItem,
-                          @"Expected -[assetWithIndexOrNil] to return secondItem.");
+                          @"Expected -[assetWithIndexOrNil:1] to return secondItem.");
     
 }
 
 #pragma mark -
-#pragma mark moveAssetFromIndex
+#pragma mark moveAssetFromIndex:toIndex:
 
--(void)testMoveAssetFromIndex_moveFrom0To1InTwoItemQueue_swapsItemsReturnsYES
+-(void)testMoveAsset_moveFrom0To1InTwoItemQueue_swapsItemsReturnsYES
 {
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNotProcessed:firstItem];
-    [self.queue addAssetToQueueIfNotProcessed:secondItem];
+    [self.queue didVerifyAsset:firstItem canAddToQueue:YES];
+    [self.queue didVerifyAsset:secondItem canAddToQueue:YES];
     
     XCTAssertTrue([self.queue moveAssetFromIndex:0 toIndex:1],
                   @"Expected -[moveAssetFromIndex:toIndex:] to return true.");
@@ -180,13 +227,13 @@
     XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], secondItem, @"Expected -[firstAsset] to return secondItem.");
 }
 
--(void)testMoveAssetFromIndex_moveFrom1To0InTwoItemQueue_swapsItemsReturnsYES
+-(void)testMoveAsset_moveFrom1To0InTwoItemQueue_swapsItemsReturnsYES
 {
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNotProcessed:firstItem];
-    [self.queue addAssetToQueueIfNotProcessed:secondItem];
+    [self.queue didVerifyAsset:firstItem canAddToQueue:YES];
+    [self.queue didVerifyAsset:secondItem canAddToQueue:YES];
     
     XCTAssertTrue([self.queue moveAssetFromIndex:1 toIndex:0],
                   @"Expected -[moveAssetFromIndex:toIndex:] to return true.");
@@ -194,13 +241,13 @@
     XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], secondItem, @"Expected -[firstAsset] to return secondItem.");
 }
 
--(void)testMoveAssetFromIndex_moveFrom0To2InTwoItemQueue_returnsNO
+-(void)testMoveAsset_moveFrom0To2InTwoItemQueue_returnsNO
 {
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNotProcessed:firstItem];
-    [self.queue addAssetToQueueIfNotProcessed:secondItem];
+    [self.queue didVerifyAsset:firstItem canAddToQueue:YES];
+    [self.queue didVerifyAsset:secondItem canAddToQueue:YES];
     
     XCTAssertFalse([self.queue moveAssetFromIndex:0 toIndex:2],
                   @"Expected -[moveAssetFromIndex:toIndex:] to return false.");
@@ -208,13 +255,13 @@
     XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], firstItem, @"Expected -[firstAsset] to return firstItem.");
 }
 
--(void)testMoveAssetFromIndex_moveFrom2To0InTwoItemQueue_returnsNO
+-(void)testMoveAsset_moveFrom2To0InTwoItemQueue_returnsNO
 {
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNotProcessed:firstItem];
-    [self.queue addAssetToQueueIfNotProcessed:secondItem];
+    [self.queue didVerifyAsset:firstItem canAddToQueue:YES];
+    [self.queue didVerifyAsset:secondItem canAddToQueue:YES];
     
     XCTAssertFalse([self.queue moveAssetFromIndex:2 toIndex:0],
                    @"Expected -[moveAssetFromIndex:toIndex:] to return false.");
@@ -222,13 +269,13 @@
     XCTAssertEqualObjects([self.queue assetWithIndexOrNil:0], firstItem, @"Expected -[firstAsset] to return firstItem.");
 }
 
--(void)testMoveAssetFromIndex_moveFrom0To0InTwoItemQueue_doesNothingReturnsYES
+-(void)testMoveAsset_moveFrom0To0InTwoItemQueue_doesNothingReturnsYES
 {
     ALAsset *firstItem = [[ALAsset alloc] init];
     ALAsset *secondItem = [[ALAsset alloc] init];
     
-    [self.queue addAssetToQueueIfNotProcessed:firstItem];
-    [self.queue addAssetToQueueIfNotProcessed:secondItem];
+    [self.queue didVerifyAsset:firstItem canAddToQueue:YES];
+    [self.queue didVerifyAsset:secondItem canAddToQueue:YES];
     
     XCTAssertTrue([self.queue moveAssetFromIndex:0 toIndex:0],
                    @"Expected -[moveAssetFromIndex:toIndex:] to return false.");

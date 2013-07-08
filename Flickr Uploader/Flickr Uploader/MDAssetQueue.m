@@ -11,64 +11,100 @@
 #import "UploadLog.h"
 @import Dispatch;
 
-static dispatch_queue_t _backgroundQueue = nil;
+#pragma mark -
+#pragma mark Private MDAssetQueue() interface
 
 @interface MDAssetQueue()
 
+/*!
+   @property orderedAssets
+   @abstract
+     Contains all assets that have been inserted into the queue.
+     
+     These assets are ordered and expected to have not been previously 
+     processed.
+ */
 @property (strong,nonatomic) NSMutableArray *orderedAssets;
 
-+(dispatch_queue_t)backgroundQueue;
--(BOOL)hasAssetBeenProcessed:(ALAsset*)asset;
+/*!
+   @property verificationsInProgress
+   @abstract
+     Maps ALAsset (as NSValue) to in-progress MDAssetVerificationOperation 
+     instances.
+ */
+@property (nonatomic, strong) NSMutableDictionary *verificationsInProgress;
+
+/*!
+ @property verificationQueue
+ @abstract
+ Queue for MDAssetVerificationOperation instances.
+ */
+@property (strong,nonatomic) NSOperationQueue *verificationQueue;
+
+/*!
+   @method markAssetProcessed:
+   @abstract
+     Saves the asset hash identifier to the persistent store.
+ */
 -(void)markAssetProcessed:(ALAsset*)asset;
--(void)addAssetToQueue:(ALAsset*)asset;
 
 @end
 
+#pragma mark -
+#pragma mark MDAssetQueue implementation
+
 @implementation MDAssetQueue
 
-- (id)init
+-(void)waitUntilAllOperationsAreFinished
+{
+    [self.verificationQueue waitUntilAllOperationsAreFinished];
+}
+
+- (id)initWithVerificationQueue:(NSOperationQueue*)verificationQueue
 {
     self = [super init];
     if (self) {
         self.orderedAssets = [[NSMutableArray alloc] init];
+        self.verificationsInProgress = [[NSMutableDictionary alloc] init];
+        self.verificationQueue = verificationQueue;
     }
     return self;
 }
 
+- (id)init
+{
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    queue.name = @"Asset Verification Queue";
+    queue.maxConcurrentOperationCount = 1;
+    
+    return [self initWithVerificationQueue:queue];
+}
+
+#pragma mark -
+#pragma mark MDAssetVerificationOperationDelegate
+
+-(void)didVerifyAsset:(ALAsset*)asset canAddToQueue:(BOOL)canAdd
+{
+    NSValue *key = [NSValue valueWithPointer:&asset];
+    [self.verificationsInProgress removeObjectForKey:key];
+    
+    if (canAdd)
+    {
+        [self.orderedAssets addObject:asset];
+        [self.delegate didFinishAddingAsset:asset withIndex:self.orderedAssets.count-1];
+    }
+}
+
 #pragma mark -
 #pragma mark Internal instance methods
-
-+(dispatch_queue_t)backgroundQueue
-{
-    if (_backgroundQueue == nil)
-    {
-        _backgroundQueue = dispatch_queue_create("lv.openid.test.asset-preparation-queue", NULL);
-    }
-    return _backgroundQueue;
-}
 
 -(void)markAssetProcessed:(ALAsset *)asset
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
     
     UploadLog *logEntry = [UploadLog MR_createInContext:localContext];
-    logEntry.byteHashString = [asset MD_createOrReturnHashedIdentifier];
+    logEntry.byteHashString = [asset MD_hashedIdentifier];
     [localContext MR_saveToPersistentStoreAndWait];
-}
-
--(BOOL)hasAssetBeenProcessed:(ALAsset*)asset
-{
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"byteHashString = %@", [asset MD_createOrReturnHashedIdentifier]];
-    
-    uint count = [UploadLog MR_countOfEntitiesWithPredicate:predicate inContext:localContext];
-    
-    return count != 0;
-}
-
--(void)addAssetToQueue:(ALAsset *)asset
-{
-    [self.orderedAssets addObject:asset];
 }
 
 #pragma mark -
@@ -79,18 +115,25 @@ static dispatch_queue_t _backgroundQueue = nil;
     return [self.orderedAssets count];
 }
 
--(void)addAssetToQueueIfNotProcessedAsync:(ALAsset *)asset withCallback:(void (^)())callback
+-(void)beginAddingAsset:(ALAsset *)asset
 {
-    dispatch_async([MDAssetQueue backgroundQueue], ^(void) {
-        if ([self hasAssetBeenProcessed:asset]) return;
-        [self addAssetToQueue:asset];
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (callback)
-            {
-                callback();
-            }
-        });
-    });
+    if (asset == nil)
+    {
+        if ([(id)self.delegate respondsToSelector:@selector(didNotAddAsset:)])
+            [self.delegate didNotAddAsset:asset];
+        return;
+    }
+    
+    MDAssetVerificationOperation *op = nil;
+    NSValue *key = [NSValue value:&asset withObjCType:@encode(ALAsset)];
+    op = [self.verificationsInProgress objectForKey:key];
+    
+    if (op == nil)
+    {
+        op = [[MDAssetVerificationOperation alloc] initWithAsset:asset andDelegate:self];
+        self.verificationsInProgress[key] = op;
+        [self.verificationQueue addOperation:op];
+    }
 }
 
 -(void)shiftAssetAndMarkProcessed
@@ -107,7 +150,13 @@ static dispatch_queue_t _backgroundQueue = nil;
 {
     if (self.orderedAssets.count < 1) return nil;
     if (ix >= self.orderedAssets.count) return nil;
-    return (ALAsset*)[self.orderedAssets objectAtIndex:ix];
+    id obj = [self.orderedAssets objectAtIndex:ix];
+    return (ALAsset*)obj;
+}
+
+-(NSUInteger)indexForAsset:(ALAsset *)asset
+{
+    return [self.orderedAssets indexOfObject:asset];
 }
 
 -(BOOL)moveAssetFromIndex:(NSUInteger)indexFrom toIndex:(NSUInteger)indexTo

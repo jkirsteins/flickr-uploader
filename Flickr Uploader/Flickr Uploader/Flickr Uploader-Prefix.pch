@@ -15,4 +15,5 @@
     #import <Foundation/Foundation.h>
 #endif
 
+#define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
 #import "CoreData+MagicalRecord.h"
