@@ -79,6 +79,7 @@
     MDAssetVerificationOperation *op = self.lastOperation;
     
     XCTAssertEqualObjects(op.asset, asset, @"Expected the op asset to be the same object as added asset.");
+    XCTAssertEqualObjects(op.delegate, self.queue, @"Expected the asset queue to be set as the verification operation delegate.");
 }
 
 -(void)testBeginAddingAsset_addNilAsset_callsDelegateFailureInCurrentThread
