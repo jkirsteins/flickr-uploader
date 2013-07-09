@@ -155,9 +155,7 @@
                         </connections>
                     </collectionView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Upload Queue" id="dEi-kt-n3d">
-                        <barButtonItem key="backBarButtonItem" title="asd" id="siq-vm-UFX"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Upload Queue" id="dEi-kt-n3d"/>
                     <connections>
                         <outlet property="collectionView" destination="zPL-qd-Msx" id="IaG-GM-E5R"/>
                         <outlet property="uploadQueue" destination="icd-73-7O8" id="x1p-Dt-HFr"/>
@@ -177,8 +175,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7L6-T4-Rj3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.38823529411764707" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="tintColor" red="1" green="0.0" blue="0.51764705882352946" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -190,64 +186,6 @@
             <point key="canvasLocation" x="70" y="-49"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="LXReorderableCollectionViewFlowLayout" superclassName="UICollectionViewFlowLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LXReorderableCollectionViewFlowLayout.h"/>
-        </class>
-        <class className="MDAssetQueue" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDAssetQueue.h"/>
-        </class>
-        <class className="MDCurrentlyProcessingCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDCurrentlyProcessingCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="thumbnailView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="MDFlickrAuthenticationViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDFlickrAuthenticationViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="authenticateButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-        <class className="MDQueuedPictureCell4" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDQueuedPictureCell4.h"/>
-            <relationships>
-                <relationship kind="outletCollection" name="thumbnails" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="MDUploadQueueCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDUploadQueueCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="MDUploadQueueViewController" superclassName="UICollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDUploadQueueViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="uploadQueue" candidateClass="MDAssetQueue"/>
-            </relationships>
-        </class>
-        <class className="MDUploadViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MDUploadViewController.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

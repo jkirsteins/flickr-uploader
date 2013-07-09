@@ -8,6 +8,7 @@
 
 #import "MDAppDelegate.h"
 #import <NewRelicAgent/NewRelicAgent.h>
+#import "UIColor+Flickr.h"
 
 @implementation MDAppDelegate
 
@@ -15,6 +16,18 @@
 {
     [MagicalRecord setupCoreDataStack];
     [NewRelicAgent startWithApplicationToken:@"AAebf75121db263155894f88ebbb5430fe8a629d08"];
+    
+    UINavigationController *navController = (UINavigationController*)self.window.rootViewController;
+
+    navController.navigationBar.barTintColor = [UIColor flickrBlueColor];
+    navController.navigationBar.tintColor = [UIColor whiteColor];
+//    navController.navigationBar.barTintColor.alpha
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
+                                                           }];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     return YES;
 }
 							
