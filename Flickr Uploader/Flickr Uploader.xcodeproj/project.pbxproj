@@ -275,6 +275,18 @@
 			name = "Background Operations";
 			sourceTree = "<group>";
 		};
+		E204E1A0178BDAFF00C61C77 /* Authentication Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E2DAFD7B176DC74800A5C316 /* RXFlickr */,
+				E2DAFE37176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.h */,
+				E2DAFE38176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.m */,
+				E2DAFE3D176DFC4000A5C316 /* MDOAuthToken.h */,
+				E2DAFE3E176DFC4000A5C316 /* MDOAuthToken.m */,
+			);
+			name = "Authentication Classes";
+			sourceTree = "<group>";
+		};
 		E221BCFC1785C201007113B5 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,21 +337,17 @@
 		E23B9C9D1767A9A10085E174 /* Flickr Uploader */ = {
 			isa = PBXGroup;
 			children = (
+				E204E1A0178BDAFF00C61C77 /* Authentication Classes */,
 				E2F424C1178B014D00C34EDC /* ALAsset+MDAssetQueue.h */,
 				E2F424C2178B014D00C34EDC /* ALAsset+MDAssetQueue.m */,
 				E20057AC1789E45200C4AAE3 /* Background Operations */,
 				E29EAE7C177DC3990090CAD6 /* LXReorderableCollectionViewFlowLayout */,
 				E221BCFC1785C201007113B5 /* CollectionViewCells */,
 				E25F80D6176EC16B00328511 /* ViewControllers */,
-				E2DAFE37176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.h */,
-				E2DAFE38176DFC4000A5C316 /* ARCKeychainGenericPasswordWrapper.m */,
 				E2DAFE39176DFC4000A5C316 /* MDAppDelegate.h */,
 				E2DAFE3A176DFC4000A5C316 /* MDAppDelegate.m */,
-				E2DAFE3D176DFC4000A5C316 /* MDOAuthToken.h */,
-				E2DAFE3E176DFC4000A5C316 /* MDOAuthToken.m */,
 				E2DAFDB8176DF1DF00A5C316 /* json-framework */,
 				E2DAFD91176DEA8800A5C316 /* Utilities */,
-				E2DAFD7B176DC74800A5C316 /* RXFlickr */,
 				E23B9CAF1767A9A10085E174 /* Images.xcassets */,
 				E23B9C9E1767A9A10085E174 /* Supporting Files */,
 				E2DAFE48176DFE2D00A5C316 /* Storyboards */,
