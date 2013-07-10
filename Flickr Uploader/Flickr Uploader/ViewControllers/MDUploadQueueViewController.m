@@ -48,17 +48,20 @@
 #pragma mark MDAssetQueueDelegate
 
 static NSMutableArray *tttPaths;
+static int cellCount = 0;
 -(void)didFinishAddingAsset:(ALAsset*)asset withIndex:(NSUInteger)index;
 {
     if (tttPaths == nil) tttPaths = [[NSMutableArray alloc] init];
     
     // TODO: put uint->NSIndexPath in one place
+    // TODO: fix this counting?
     uint section = (index < 1 ? 0 : 1);
     uint row = index - section;
     NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
     [tttPaths addObject:path];
+    cellCount += 1;
     
-    if ([tttPaths count] % 15 == 0)
+    if (([tttPaths count] % 15 == 0 || cellCount <= 15) && [tttPaths count] > 0)
     {
         [self.collectionView insertItemsAtIndexPaths:tttPaths];
         [tttPaths removeAllObjects];
@@ -149,18 +152,44 @@ static NSMutableArray *tttPaths;
     ALAsset *asset = [self.uploadQueue assetWithIndexOrNil:ix];
     
     if (indexPath.section == 0)
-        cell.imageView.image = [UIImage imageWithCGImage:asset.aspectRatioThumbnail];
+        cell.imageView.image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullScreenImage];
     else
         cell.imageView.image = [UIImage imageWithCGImage:asset.thumbnail];
     
+
+    //-
     cell.imageView.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
-    cell.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    //-
     
+    [cell.imageView setBackgroundColor:[UIColor redColor]];
+    cell.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
     return cell;
 }
 
+/*- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *reusableview = nil;
+    //return nil;
+    //if (kind == UICollectionElementKindSectionHeader) {
+        UICollectionReusableView *headerView = [[UICollectionReusableView alloc] init];
+        UILabel *label = [[UILabel alloc] init];
+        [label setText:[NSString stringWithFormat:@"Figna: %@", kind]];
+        [headerView addSubview:label];
+        
+        reusableview = headerView;
+    //}
+    
+    return reusableview;
+}*/
+
 
 #pragma mark – UICollectionViewDelegateFlowLayout
+
+/*- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(collectionView.frame.size.width, 40.0f);
+}*/
 
 // 1
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

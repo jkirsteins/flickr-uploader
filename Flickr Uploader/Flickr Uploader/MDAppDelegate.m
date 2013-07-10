@@ -19,18 +19,16 @@
     
     UINavigationController *navController = (UINavigationController*)self.window.rootViewController;
 
-    navController.navigationBar.barTintColor = [UIColor flickrBlueColor];
-    navController.navigationBar.tintColor = [UIColor whiteColor];
-//    navController.navigationBar.barTintColor.alpha
+    navController.navigationBar.barTintColor = [UIColor flickrPinkColor];
+    navController.navigationBar.tintColor = [UIColor flickrBlueColor];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                           NSForegroundColorAttributeName: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
+                                                           NSForegroundColorAttributeName: [UIColor whiteColor]
                                                            }];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
