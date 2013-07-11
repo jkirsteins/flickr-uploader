@@ -8,7 +8,7 @@
 
 #import "MDAppDelegate.h"
 #import <NewRelicAgent/NewRelicAgent.h>
-#import "UIColor+Flickr.h"
+#import "UIColor+MDFlickrActivityIndicatorView.h"
 
 @implementation MDAppDelegate
 
@@ -19,11 +19,11 @@
     
     UINavigationController *navController = (UINavigationController*)self.window.rootViewController;
 
-    navController.navigationBar.barTintColor = [UIColor flickrBlueColor];
+    navController.navigationBar.barTintColor = [UIColor MD_flickrBlueColor];
     navController.navigationBar.tintColor = [UIColor whiteColor];
 //    navController.navigationBar.barTintColor.alpha
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                           NSForegroundColorAttributeName: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
+                                                           NSForegroundColorAttributeName: [UIColor whiteColor]
                                                            }];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];

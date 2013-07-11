@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E20057AF1789E47800C4AAE3 /* MDAssetVerificationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E20057AE1789E47800C4AAE3 /* MDAssetVerificationOperation.m */; };
-		E204E1A3178BDC1A00C61C77 /* UIColor+Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = E204E1A2178BDC1A00C61C77 /* UIColor+Flickr.m */; };
 		E2069C10178596B000675485 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C0F178596B000675485 /* NewRelicAgent.framework */; };
 		E2069C12178596D800675485 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C11178596D800675485 /* CoreTelephony.framework */; };
 		E2069C14178596DE00675485 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2069C13178596DE00675485 /* SystemConfiguration.framework */; };
@@ -82,6 +81,8 @@
 		E2DAFE41176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE3C176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m */; };
 		E2DAFE42176DFC4000A5C316 /* MDOAuthToken.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAFE3E176DFC4000A5C316 /* MDOAuthToken.m */; };
 		E2DAFE47176DFE2700A5C316 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2DAFE46176DFE2700A5C316 /* iPhone.storyboard */; };
+		E2DBB058178EB06200329423 /* MDFlickrActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DBB055178EB06200329423 /* MDFlickrActivityIndicatorView.m */; };
+		E2DBB059178EB06200329423 /* UIColor+MDFlickrActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DBB057178EB06200329423 /* UIColor+MDFlickrActivityIndicatorView.m */; };
 		E2F2C443177F798500528D02 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F2C441177F793600528D02 /* libOCMock.a */; };
 		E2F424C3178B014D00C34EDC /* ALAsset+MDAssetQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F424C2178B014D00C34EDC /* ALAsset+MDAssetQueue.m */; };
 /* End PBXBuildFile section */
@@ -99,8 +100,6 @@
 /* Begin PBXFileReference section */
 		E20057AD1789E47800C4AAE3 /* MDAssetVerificationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDAssetVerificationOperation.h; path = "Background Operations/MDAssetVerificationOperation.h"; sourceTree = "<group>"; };
 		E20057AE1789E47800C4AAE3 /* MDAssetVerificationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDAssetVerificationOperation.m; path = "Background Operations/MDAssetVerificationOperation.m"; sourceTree = "<group>"; };
-		E204E1A1178BDC1A00C61C77 /* UIColor+Flickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Flickr.h"; sourceTree = "<group>"; };
-		E204E1A2178BDC1A00C61C77 /* UIColor+Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Flickr.m"; sourceTree = "<group>"; };
 		E2069C0F178596B000675485 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		E2069C11178596D800675485 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		E2069C13178596DE00675485 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -234,6 +233,10 @@
 		E2DAFE3D176DFC4000A5C316 /* MDOAuthToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDOAuthToken.h; sourceTree = "<group>"; };
 		E2DAFE3E176DFC4000A5C316 /* MDOAuthToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDOAuthToken.m; sourceTree = "<group>"; };
 		E2DAFE46176DFE2700A5C316 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iPhone.storyboard; path = Storyboards/iPhone.storyboard; sourceTree = "<group>"; };
+		E2DBB054178EB06200329423 /* MDFlickrActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDFlickrActivityIndicatorView.h; sourceTree = "<group>"; };
+		E2DBB055178EB06200329423 /* MDFlickrActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDFlickrActivityIndicatorView.m; sourceTree = "<group>"; };
+		E2DBB056178EB06200329423 /* UIColor+MDFlickrActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MDFlickrActivityIndicatorView.h"; sourceTree = "<group>"; };
+		E2DBB057178EB06200329423 /* UIColor+MDFlickrActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MDFlickrActivityIndicatorView.m"; sourceTree = "<group>"; };
 		E2F2C441177F793600528D02 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = usr/lib/libOCMock.a; sourceTree = "<group>"; };
 		E2F424C1178B014D00C34EDC /* ALAsset+MDAssetQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+MDAssetQueue.h"; sourceTree = "<group>"; };
 		E2F424C2178B014D00C34EDC /* ALAsset+MDAssetQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+MDAssetQueue.m"; sourceTree = "<group>"; };
@@ -302,6 +305,7 @@
 		E23B9C8B1767A9A10085E174 = {
 			isa = PBXGroup;
 			children = (
+				E2DBB053178EB06200329423 /* MDFlickrActivityIndicatorView */,
 				E26C031417840C9700EB8300 /* MagicalRecord */,
 				E23B9C9D1767A9A10085E174 /* Flickr Uploader */,
 				E23B9CBC1767A9A10085E174 /* Flickr UploaderTests */,
@@ -357,8 +361,6 @@
 				E278217D177A25D90064278F /* Model */,
 				E22A665717830644001224F7 /* MDAssetQueue.h */,
 				E22A665817830644001224F7 /* MDAssetQueue.m */,
-				E204E1A1178BDC1A00C61C77 /* UIColor+Flickr.h */,
-				E204E1A2178BDC1A00C61C77 /* UIColor+Flickr.m */,
 			);
 			path = "Flickr Uploader";
 			sourceTree = "<group>";
@@ -591,6 +593,17 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
+		E2DBB053178EB06200329423 /* MDFlickrActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				E2DBB054178EB06200329423 /* MDFlickrActivityIndicatorView.h */,
+				E2DBB055178EB06200329423 /* MDFlickrActivityIndicatorView.m */,
+				E2DBB056178EB06200329423 /* UIColor+MDFlickrActivityIndicatorView.h */,
+				E2DBB057178EB06200329423 /* UIColor+MDFlickrActivityIndicatorView.m */,
+			);
+			path = MDFlickrActivityIndicatorView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -727,6 +740,8 @@
 				E26C035C17840C9700EB8300 /* NSString+MagicalDataImport.m in Sources */,
 				E26C035417840C9700EB8300 /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				E26C036E17840C9700EB8300 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
+				E2DBB058178EB06200329423 /* MDFlickrActivityIndicatorView.m in Sources */,
+				E2DBB059178EB06200329423 /* UIColor+MDFlickrActivityIndicatorView.m in Sources */,
 				E2DAFE2A176DFC0600A5C316 /* SBJsonWriter.m in Sources */,
 				E26C036617840C9700EB8300 /* NSManagedObject+MagicalRequests.m in Sources */,
 				E2DAFE41176DFC4000A5C316 /* MDFlickrAuthenticationViewController.m in Sources */,
@@ -735,7 +750,6 @@
 				E26C038217840C9700EB8300 /* MagicalRecord.m in Sources */,
 				E26C036817840C9700EB8300 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				E2DAFE20176DFC0600A5C316 /* SBJsonParser.m in Sources */,
-				E204E1A3178BDC1A00C61C77 /* UIColor+Flickr.m in Sources */,
 				E26C037817840C9700EB8300 /* MagicalRecord+ErrorHandling.m in Sources */,
 				E2DAFE42176DFC4000A5C316 /* MDOAuthToken.m in Sources */,
 				E2DAFE23176DFC0600A5C316 /* SBJsonStreamParserAdapter.m in Sources */,

@@ -35,6 +35,11 @@ static NSString* kCallbackURL = @"md://flickr/callback";
     [_flickrAccount checkTokenWithValue:_oauthToken.value andSecret:_oauthToken.secret];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.spinner startAnimating];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
