@@ -154,12 +154,14 @@ static int cellCount = 0;
     ALAsset *asset = [self.uploadQueue assetWithIndexOrNil:ix];
     
     if (indexPath.section == 0)
-        cell.imageView.image = [UIImage imageWithCGImage:asset.aspectRatioThumbnail];
+        cell.imageView.image = [UIImage imageWithCGImage:[asset defaultRepresentation].fullScreenImage];
     else
         cell.imageView.image = [UIImage imageWithCGImage:asset.thumbnail];
     
     cell.imageView.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
     cell.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+
     
     return cell;
 }
