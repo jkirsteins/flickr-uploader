@@ -8,9 +8,9 @@
         <!--Flickr Authentication View Controller - Authentication-->
         <scene sceneID="ZgF-4r-669">
             <objects>
-                <viewController storyboardIdentifier="authViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xVV-Nh-B70" customClass="MDFlickrAuthenticationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="authViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xVV-Nh-B70" customClass="MDFlickrAuthenticationViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6LY-Fc-oMc">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6VU-27-y5Y">
@@ -29,15 +29,16 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="USA-J1-huF" customClass="MDFlickrActivityIndicatorView">
-                                <rect key="frame" x="120" y="200" width="81" height="37"/>
+                                <rect key="frame" x="120" y="246" width="81" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Authentication" id="i71-rD-1gh"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="authenticateButton" destination="6VU-27-y5Y" id="zRi-ZO-fQH"/>
                         <outlet property="spinner" destination="USA-J1-huF" id="ByF-DV-byv"/>
@@ -124,15 +125,15 @@
         <!--Upload Queue View Controller - Upload Queue-->
         <scene sceneID="d7z-TJ-zPc">
             <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="cDx-d2-uwj" customClass="MDUploadQueueViewController" sceneMemberID="viewController">
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" id="cDx-d2-uwj" customClass="MDUploadQueueViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="zPL-qd-Msx">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="Tw4-dT-8eg" customClass="LXReorderableCollectionViewFlowLayout"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="small" reuseIdentifier="small" id="IwA-pP-bZ5" customClass="MDUploadQueueCell">
-                                <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
+                                <rect key="frame" x="0.0" y="64" width="79" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
@@ -155,8 +156,9 @@
                             <outlet property="delegate" destination="cDx-d2-uwj" id="lo1-WH-ZRR"/>
                         </connections>
                     </collectionView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Upload Queue" id="dEi-kt-n3d"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="zPL-qd-Msx" id="IaG-GM-E5R"/>
                         <outlet property="uploadQueue" destination="icd-73-7O8" id="x1p-Dt-HFr"/>
