@@ -48,17 +48,22 @@
 #pragma mark MDAssetQueueDelegate
 
 static NSMutableArray *tttPaths;
+static int cellCount = 0;
+
 -(void)didFinishAddingAsset:(ALAsset*)asset withIndex:(NSUInteger)index;
 {
     if (tttPaths == nil) tttPaths = [[NSMutableArray alloc] init];
     
     // TODO: put uint->NSIndexPath in one place
+    // TODO: fix this counting?
+
     uint section = (index < 1 ? 0 : 1);
     uint row = index - section;
     NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
     [tttPaths addObject:path];
-    
-    if ([tttPaths count] % 15 == 0)
+    cellCount += 1;
+ 
+    if (([tttPaths count] % 15 == 0 || cellCount <= 15) && [tttPaths count] > 0)
     {
         [self.collectionView insertItemsAtIndexPaths:tttPaths];
         [tttPaths removeAllObjects];
